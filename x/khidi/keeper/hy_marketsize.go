@@ -89,8 +89,33 @@ func (k Keeper) GetRecentHyMarketsize(
 		}
 	}
 
-	if recentYear == 0 {
+	if recentYear == -1 {
 		return val, false
 	}
 	return recentVal, true
+}
+
+func (k Keeper) ComputeAllUniqueNames(ctx sdk.Context) (list []string) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HyMarketsizeKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.HyMarketsize
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+
+		contains := false
+		for _, name := range list {
+			if name == val.Name {
+				contains = true
+				break
+			}
+		}
+		if !contains {
+			list = append(list, val.Name)
+		}
+	}
+
+	return
 }

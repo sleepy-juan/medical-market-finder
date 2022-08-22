@@ -1,5 +1,6 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { HyAllNamesOf } from "./module/types/khidi/hy_all_names_of"
 import { HyExport } from "./module/types/khidi/hy_export"
 import { HyImport } from "./module/types/khidi/hy_import"
 import { HyMarketsize } from "./module/types/khidi/hy_marketsize"
@@ -7,7 +8,7 @@ import { HyPartner } from "./module/types/khidi/hy_partner"
 import { Params } from "./module/types/khidi/params"
 
 
-export { HyExport, HyImport, HyMarketsize, HyPartner, Params };
+export { HyAllNamesOf, HyExport, HyImport, HyMarketsize, HyPartner, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -58,8 +59,17 @@ const getDefaultState = () => {
 				HyRecentPartner: {},
 				HyRecentImport: {},
 				HyRecentExport: {},
+				HyDomesticMarketShare: {},
+				HyCompetition: {},
+				HyTradeDependency: {},
+				HyQuality: {},
+				HyProtectionism: {},
+				HySuccess: {},
+				HyAllValuesOf: {},
+				HyAllNamesOf: {},
 				
 				_Structure: {
+						HyAllNamesOf: getStructure(HyAllNamesOf.fromPartial({})),
 						HyExport: getStructure(HyExport.fromPartial({})),
 						HyImport: getStructure(HyImport.fromPartial({})),
 						HyMarketsize: getStructure(HyMarketsize.fromPartial({})),
@@ -170,6 +180,54 @@ export default {
 						(<any> params).query=null
 					}
 			return state.HyRecentExport[JSON.stringify(params)] ?? {}
+		},
+				getHyDomesticMarketShare: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyDomesticMarketShare[JSON.stringify(params)] ?? {}
+		},
+				getHyCompetition: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyCompetition[JSON.stringify(params)] ?? {}
+		},
+				getHyTradeDependency: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyTradeDependency[JSON.stringify(params)] ?? {}
+		},
+				getHyQuality: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyQuality[JSON.stringify(params)] ?? {}
+		},
+				getHyProtectionism: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyProtectionism[JSON.stringify(params)] ?? {}
+		},
+				getHySuccess: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HySuccess[JSON.stringify(params)] ?? {}
+		},
+				getHyAllValuesOf: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyAllValuesOf[JSON.stringify(params)] ?? {}
+		},
+				getHyAllNamesOf: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyAllNamesOf[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -507,18 +565,194 @@ export default {
 		},
 		
 		
-		async sendMsgHyAddPartner({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryHyDomesticMarketShare({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyDomesticMarketShare( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyDomesticMarketShare', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyDomesticMarketShare', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyDomesticMarketShare']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyDomesticMarketShare API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyCompetition({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyCompetition( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyCompetition', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyCompetition', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyCompetition']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyCompetition API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyTradeDependency({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyTradeDependency( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyTradeDependency', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyTradeDependency', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyTradeDependency']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyTradeDependency API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyQuality({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyQuality( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyQuality', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyQuality', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyQuality']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyQuality API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyProtectionism({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyProtectionism( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyProtectionism', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyProtectionism', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyProtectionism']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyProtectionism API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHySuccess({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHySuccess( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HySuccess', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHySuccess', payload: { options: { all }, params: {...key},query }})
+				return getters['getHySuccess']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHySuccess API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyAllValuesOf({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyAllValuesOf( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyAllValuesOf', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyAllValuesOf', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyAllValuesOf']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyAllValuesOf API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyAllNamesOf({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyAllNamesOf( key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyAllNamesOf', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyAllNamesOf', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyAllNamesOf']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyAllNamesOf API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		async sendMsgHyAddExport({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddPartner(value)
+				const msg = await txClient.msgHyAddExport(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddPartner:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgHyAddPartner:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgHyAddExport:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -552,32 +786,32 @@ export default {
 				}
 			}
 		},
-		async sendMsgHyAddExport({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgHyAddPartner({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddExport(value)
+				const msg = await txClient.msgHyAddPartner(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddPartner:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgHyAddExport:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgHyAddPartner:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgHyAddPartner({ rootGetters }, { value }) {
+		async MsgHyAddExport({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddPartner(value)
+				const msg = await txClient.msgHyAddExport(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddPartner:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgHyAddPartner:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgHyAddExport:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -607,16 +841,16 @@ export default {
 				}
 			}
 		},
-		async MsgHyAddExport({ rootGetters }, { value }) {
+		async MsgHyAddPartner({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddExport(value)
+				const msg = await txClient.msgHyAddPartner(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddPartner:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgHyAddExport:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgHyAddPartner:Create Could not create message: ' + e.message)
 				}
 			}
 		},

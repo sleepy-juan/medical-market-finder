@@ -89,7 +89,7 @@ func (k Keeper) GetRecentHyImport(
 		}
 	}
 
-	if recentYear == 0 {
+	if recentYear == -1 {
 		return val, false
 	}
 	return recentVal, true

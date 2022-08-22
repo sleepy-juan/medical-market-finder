@@ -65,6 +65,23 @@ func (k Keeper) GetAllHyPartner(ctx sdk.Context) (list []types.HyPartner) {
 }
 
 // custom made
+func (k Keeper) GetAllHyPartnerWithBuyer(ctx sdk.Context, buyer string) (list []types.HyPartner) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HyPartnerKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.HyPartner
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		if val.Buyer == buyer {
+			list = append(list, val)
+		}
+	}
+
+	return
+}
+
 func (k Keeper) GetRecentHyPartner(
 	ctx sdk.Context,
 	buyer string,
@@ -80,7 +97,7 @@ func (k Keeper) GetRecentHyPartner(
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.HyPartner
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		if val.Buyer == buyer && val.Seller == seller{
+		if val.Buyer == buyer && val.Seller == seller {
 			year, _ := strconv.Atoi(val.Year)
 			if year > recentYear {
 				recentYear = year
@@ -89,7 +106,7 @@ func (k Keeper) GetRecentHyPartner(
 		}
 	}
 
-	if recentYear == 0 {
+	if recentYear == -1 {
 		return val, false
 	}
 	return recentVal, true

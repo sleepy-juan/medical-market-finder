@@ -9,6 +9,19 @@
  * ---------------------------------------------------------------
  */
 
+export interface KhidiHyAllNamesOf {
+  name?: string;
+  recentMarketsize?: string;
+  recentImport?: string;
+  recentExport?: string;
+  domesticMarketShare?: string;
+  competition?: string;
+  tradeDependency?: string;
+  quality?: string;
+  protectionism?: string;
+  success?: string;
+}
+
 export interface KhidiHyExport {
   index?: string;
   name?: string;
@@ -130,6 +143,38 @@ export interface KhidiQueryGetHyPartnerResponse {
   hyPartner?: KhidiHyPartner;
 }
 
+export interface KhidiQueryHyAllNamesOfResponse {
+  HyAllNamesOf?: KhidiHyAllNamesOf[];
+}
+
+export interface KhidiQueryHyAllValuesOfResponse {
+  recentMarketsize?: string;
+  recentImport?: string;
+  recentExport?: string;
+  domesticMarketShare?: string;
+  competition?: string;
+  tradeDependency?: string;
+  quality?: string;
+  protectionism?: string;
+  success?: string;
+}
+
+export interface KhidiQueryHyCompetitionResponse {
+  value?: string;
+}
+
+export interface KhidiQueryHyDomesticMarketShareResponse {
+  value?: string;
+}
+
+export interface KhidiQueryHyProtectionismResponse {
+  value?: string;
+}
+
+export interface KhidiQueryHyQualityResponse {
+  value?: string;
+}
+
 export interface KhidiQueryHyRecentExportResponse {
   volume?: string;
 }
@@ -144,6 +189,14 @@ export interface KhidiQueryHyRecentMarketsizeResponse {
 
 export interface KhidiQueryHyRecentPartnerResponse {
   volume?: string;
+}
+
+export interface KhidiQueryHySuccessResponse {
+  value?: string;
+}
+
+export interface KhidiQueryHyTradeDependencyResponse {
+  value?: string;
 }
 
 /**
@@ -428,6 +481,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
+   * @name QueryHyAllNamesOf
+   * @summary Queries a list of HyAllNamesOf items.
+   * @request GET:/khidi/khidi/hy_all_names_of/{group}
+   */
+  queryHyAllNamesOf = (group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyAllNamesOfResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_all_names_of/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyAllValuesOf
+   * @summary Queries a list of HyAllValuesOf items.
+   * @request GET:/khidi/khidi/hy_all_values_of/{name}/{group}
+   */
+  queryHyAllValuesOf = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyAllValuesOfResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_all_values_of/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyCompetition
+   * @summary Queries a list of HyCompetition items.
+   * @request GET:/khidi/khidi/hy_competition/{name}/{group}
+   */
+  queryHyCompetition = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyCompetitionResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_competition/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyDomesticMarketShare
+   * @summary Queries a list of HyDomesticMarketShare items.
+   * @request GET:/khidi/khidi/hy_domestic_market_share/{name}/{group}
+   */
+  queryHyDomesticMarketShare = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyDomesticMarketShareResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_domestic_market_share/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
    * @name QueryHyExportAll
    * @summary Queries a list of HyExport items.
    * @request GET:/khidi/khidi/hy_export
@@ -596,6 +713,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
+   * @name QueryHyProtectionism
+   * @summary Queries a list of HyProtectionism items.
+   * @request GET:/khidi/khidi/hy_protectionism/{name}/{group}
+   */
+  queryHyProtectionism = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyProtectionismResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_protectionism/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyQuality
+   * @summary Queries a list of HyQuality items.
+   * @request GET:/khidi/khidi/hy_quality/{name}/{group}
+   */
+  queryHyQuality = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyQualityResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_quality/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
    * @name QueryHyRecentExport
    * @summary Queries a list of HyRecentExport items.
    * @request GET:/khidi/khidi/hy_recent_export/{name}/{group}
@@ -651,6 +800,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryHyRecentPartner = (buyer: string, seller: string, params: RequestParams = {}) =>
     this.request<KhidiQueryHyRecentPartnerResponse, RpcStatus>({
       path: `/khidi/khidi/hy_recent_partner/${buyer}/${seller}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHySuccess
+   * @summary Queries a list of HySuccess items.
+   * @request GET:/khidi/khidi/hy_success/{name}/{group}
+   */
+  queryHySuccess = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHySuccessResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_success/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyTradeDependency
+   * @summary Queries a list of HyTradeDependency items.
+   * @request GET:/khidi/khidi/hy_trade_dependency/{name}/{group}
+   */
+  queryHyTradeDependency = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyTradeDependencyResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_trade_dependency/${name}/${group}`,
       method: "GET",
       format: "json",
       ...params,

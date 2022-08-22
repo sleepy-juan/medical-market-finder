@@ -9,6 +9,7 @@ import "khidi/hy_marketsize.proto";
 import "khidi/hy_partner.proto";
 import "khidi/hy_import.proto";
 import "khidi/hy_export.proto";
+import "khidi/hy_all_names_of.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "khidi/x/khidi/types";
@@ -77,6 +78,46 @@ service Query {
 // Queries a list of HyRecentExport items.
 	rpc HyRecentExport(QueryHyRecentExportRequest) returns (QueryHyRecentExportResponse) {
 		option (google.api.http).get = "/khidi/khidi/hy_recent_export/{name}/{group}";
+	}
+
+// Queries a list of HyDomesticMarketShare items.
+	rpc HyDomesticMarketShare(QueryHyDomesticMarketShareRequest) returns (QueryHyDomesticMarketShareResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_domestic_market_share/{name}/{group}";
+	}
+
+// Queries a list of HyCompetition items.
+	rpc HyCompetition(QueryHyCompetitionRequest) returns (QueryHyCompetitionResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_competition/{name}/{group}";
+	}
+
+// Queries a list of HyTradeDependency items.
+	rpc HyTradeDependency(QueryHyTradeDependencyRequest) returns (QueryHyTradeDependencyResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_trade_dependency/{name}/{group}";
+	}
+
+// Queries a list of HyQuality items.
+	rpc HyQuality(QueryHyQualityRequest) returns (QueryHyQualityResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_quality/{name}/{group}";
+	}
+
+// Queries a list of HyProtectionism items.
+	rpc HyProtectionism(QueryHyProtectionismRequest) returns (QueryHyProtectionismResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_protectionism/{name}/{group}";
+	}
+
+// Queries a list of HySuccess items.
+	rpc HySuccess(QueryHySuccessRequest) returns (QueryHySuccessResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_success/{name}/{group}";
+	}
+
+// Queries a list of HyAllValuesOf items.
+	rpc HyAllValuesOf(QueryHyAllValuesOfRequest) returns (QueryHyAllValuesOfResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_all_values_of/{name}/{group}";
+	}
+
+// Queries a list of HyAllNamesOf items.
+	rpc HyAllNamesOf(QueryHyAllNamesOfRequest) returns (QueryHyAllNamesOfResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_all_names_of/{group}";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -197,6 +238,85 @@ message QueryHyRecentExportRequest {
 
 message QueryHyRecentExportResponse {
   string volume = 1;
+}
+
+message QueryHyDomesticMarketShareRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyDomesticMarketShareResponse {
+  string value = 1;
+}
+
+message QueryHyCompetitionRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyCompetitionResponse {
+  string value = 1;
+}
+
+message QueryHyTradeDependencyRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyTradeDependencyResponse {
+  string value = 1;
+}
+
+message QueryHyQualityRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyQualityResponse {
+  string value = 1;
+}
+
+message QueryHyProtectionismRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyProtectionismResponse {
+  string value = 1;
+}
+
+message QueryHySuccessRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHySuccessResponse {
+  string value = 1;
+}
+
+message QueryHyAllValuesOfRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyAllValuesOfResponse {
+  string recentMarketsize = 1;
+  string recentImport = 2;
+  string recentExport = 3;
+  string domesticMarketShare = 4;
+  string competition = 5;
+  string tradeDependency = 6;
+  string quality = 7;
+  string protectionism = 8;
+  string success = 9;
+}
+
+message QueryHyAllNamesOfRequest {
+  string group = 1;
+}
+
+message QueryHyAllNamesOfResponse {
+  repeated HyAllNamesOf HyAllNamesOf = 1;
 }
 
 // this line is used by starport scaffolding # 3

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package khidi.khidi;
+
+option go_package = "khidi/x/khidi/types";
+
+message HyAllNamesOf {
+  string name = 1;
+  string recentMarketsize = 2;
+  string recentImport = 3;
+  string recentExport = 4;
+  string domesticMarketShare = 5;
+  string competition = 6;
+  string tradeDependency = 7;
+  string quality = 8;
+  string protectionism = 9;
+  string success = 10;
+}
+
