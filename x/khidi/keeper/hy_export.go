@@ -4,6 +4,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"khidi/x/khidi/types"
+
+	"strconv"
 )
 
 // SetHyExport set a specific hyExport in the store from its index
@@ -60,4 +62,35 @@ func (k Keeper) GetAllHyExport(ctx sdk.Context) (list []types.HyExport) {
 	}
 
 	return
+}
+
+// custom made
+func (k Keeper) GetRecentHyExport(
+	ctx sdk.Context,
+	name string,
+	group string,
+) (val types.HyExport, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HyExportKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	recentYear := -1
+	var recentVal types.HyExport
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.HyExport
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		if val.Name == name && val.Group == group {
+			year, _ := strconv.Atoi(val.Year)
+			if year > recentYear{
+				recentYear = year
+				recentVal = val
+			}
+		}
+	}
+
+	if recentYear == 0 {
+		return val, false
+	}
+	return recentVal, true
 }

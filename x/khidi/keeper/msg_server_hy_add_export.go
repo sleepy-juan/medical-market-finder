@@ -10,8 +10,14 @@ import (
 func (k msgServer) HyAddExport(goCtx context.Context, msg *types.MsgHyAddExport) (*types.MsgHyAddExportResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	export := types.HyExport {
+		Index: msg.Name + "_" + msg.Year + "_" + msg.Group,
+		Name: msg.Name,
+		Year: msg.Year,
+		Group: msg.Group,
+		Volume: msg.Volume,
+	}
+	k.SetHyExport(ctx, export)
 
 	return &types.MsgHyAddExportResponse{}, nil
 }
