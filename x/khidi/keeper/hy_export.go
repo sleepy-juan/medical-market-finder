@@ -82,7 +82,7 @@ func (k Keeper) GetRecentHyExport(
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		if val.Name == name && val.Group == group {
 			year, _ := strconv.Atoi(val.Year)
-			if year > recentYear{
+			if year > recentYear {
 				recentYear = year
 				recentVal = val
 			}

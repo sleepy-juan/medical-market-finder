@@ -54,6 +54,10 @@ const getDefaultState = () => {
 				HyImportAll: {},
 				HyExport: {},
 				HyExportAll: {},
+				HyRecentMarketsize: {},
+				HyRecentPartner: {},
+				HyRecentImport: {},
+				HyRecentExport: {},
 				
 				_Structure: {
 						HyExport: getStructure(HyExport.fromPartial({})),
@@ -142,6 +146,30 @@ export default {
 						(<any> params).query=null
 					}
 			return state.HyExportAll[JSON.stringify(params)] ?? {}
+		},
+				getHyRecentMarketsize: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyRecentMarketsize[JSON.stringify(params)] ?? {}
+		},
+				getHyRecentPartner: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyRecentPartner[JSON.stringify(params)] ?? {}
+		},
+				getHyRecentImport: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyRecentImport[JSON.stringify(params)] ?? {}
+		},
+				getHyRecentExport: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HyRecentExport[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -391,21 +419,94 @@ export default {
 		},
 		
 		
-		async sendMsgHyAddImport({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryHyRecentMarketsize({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddImport(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyRecentMarketsize( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyRecentMarketsize', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyRecentMarketsize', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyRecentMarketsize']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddImport:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgHyAddImport:Send Could not broadcast Tx: '+ e.message)
-				}
+				throw new Error('QueryClient:QueryHyRecentMarketsize API Node Unavailable. Could not perform query: ' + e.message)
+				
 			}
 		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyRecentPartner({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyRecentPartner( key.buyer,  key.seller)).data
+				
+					
+				commit('QUERY', { query: 'HyRecentPartner', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyRecentPartner', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyRecentPartner']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyRecentPartner API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyRecentImport({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyRecentImport( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyRecentImport', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyRecentImport', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyRecentImport']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyRecentImport API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHyRecentExport({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryHyRecentExport( key.name,  key.group)).data
+				
+					
+				commit('QUERY', { query: 'HyRecentExport', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHyRecentExport', payload: { options: { all }, params: {...key},query }})
+				return getters['getHyRecentExport']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHyRecentExport API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgHyAddPartner({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -421,18 +522,18 @@ export default {
 				}
 			}
 		},
-		async sendMsgHyAddExport({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgHyAddImport({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddExport(value)
+				const msg = await txClient.msgHyAddImport(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddImport:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgHyAddExport:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgHyAddImport:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -451,20 +552,22 @@ export default {
 				}
 			}
 		},
-		
-		async MsgHyAddImport({ rootGetters }, { value }) {
+		async sendMsgHyAddExport({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddImport(value)
-				return msg
+				const msg = await txClient.msgHyAddExport(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddImport:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgHyAddImport:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgHyAddExport:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
+		
 		async MsgHyAddPartner({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -478,16 +581,16 @@ export default {
 				}
 			}
 		},
-		async MsgHyAddExport({ rootGetters }, { value }) {
+		async MsgHyAddImport({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgHyAddExport(value)
+				const msg = await txClient.msgHyAddImport(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgHyAddImport:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgHyAddExport:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgHyAddImport:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -501,6 +604,19 @@ export default {
 					throw new Error('TxClient:MsgHyAddMarketsize:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgHyAddMarketsize:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgHyAddExport({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgHyAddExport(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgHyAddExport:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgHyAddExport:Create Could not create message: ' + e.message)
 				}
 			}
 		},

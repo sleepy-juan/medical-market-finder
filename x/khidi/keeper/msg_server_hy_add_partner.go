@@ -10,11 +10,11 @@ import (
 func (k msgServer) HyAddPartner(goCtx context.Context, msg *types.MsgHyAddPartner) (*types.MsgHyAddPartnerResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	partner := types.HyPartner {
-		Index: msg.Buyer + "_" + msg.Seller + "_" + msg.Year,
-		Buyer: msg.Buyer,
-		Seller: msg.Seller,
-		Year: msg.Year,
+	partner := types.HyPartner{
+		Index:      msg.Buyer + "_" + msg.Seller + "_" + msg.Year,
+		Buyer:      msg.Buyer,
+		Seller:     msg.Seller,
+		Year:       msg.Year,
 		Proportion: msg.Proportion,
 	}
 	k.SetHyPartner(ctx, partner)

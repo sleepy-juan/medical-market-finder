@@ -59,6 +59,26 @@ service Query {
 		option (google.api.http).get = "/khidi/khidi/hy_export";
 	}
 
+// Queries a list of HyRecentMarketsize items.
+	rpc HyRecentMarketsize(QueryHyRecentMarketsizeRequest) returns (QueryHyRecentMarketsizeResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_recent_marketsize/{name}/{group}";
+	}
+
+// Queries a list of HyRecentPartner items.
+	rpc HyRecentPartner(QueryHyRecentPartnerRequest) returns (QueryHyRecentPartnerResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_recent_partner/{buyer}/{seller}";
+	}
+
+// Queries a list of HyRecentImport items.
+	rpc HyRecentImport(QueryHyRecentImportRequest) returns (QueryHyRecentImportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_recent_import/{name}/{group}";
+	}
+
+// Queries a list of HyRecentExport items.
+	rpc HyRecentExport(QueryHyRecentExportRequest) returns (QueryHyRecentExportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_recent_export/{name}/{group}";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -141,6 +161,42 @@ message QueryAllHyExportRequest {
 message QueryAllHyExportResponse {
 	repeated HyExport hyExport = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryHyRecentMarketsizeRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyRecentMarketsizeResponse {
+  string volume = 1;
+}
+
+message QueryHyRecentPartnerRequest {
+  string buyer = 1;
+  string seller = 2;
+}
+
+message QueryHyRecentPartnerResponse {
+  string volume = 1;
+}
+
+message QueryHyRecentImportRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyRecentImportResponse {
+  string volume = 1;
+}
+
+message QueryHyRecentExportRequest {
+  string name = 1;
+  string group = 2;
+}
+
+message QueryHyRecentExportResponse {
+  string volume = 1;
 }
 
 // this line is used by starport scaffolding # 3

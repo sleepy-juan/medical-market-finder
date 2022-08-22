@@ -89,6 +89,42 @@ export interface QueryAllHyExportResponse {
   pagination: PageResponse | undefined;
 }
 
+export interface QueryHyRecentMarketsizeRequest {
+  name: string;
+  group: string;
+}
+
+export interface QueryHyRecentMarketsizeResponse {
+  volume: string;
+}
+
+export interface QueryHyRecentPartnerRequest {
+  buyer: string;
+  seller: string;
+}
+
+export interface QueryHyRecentPartnerResponse {
+  volume: string;
+}
+
+export interface QueryHyRecentImportRequest {
+  name: string;
+  group: string;
+}
+
+export interface QueryHyRecentImportResponse {
+  volume: string;
+}
+
+export interface QueryHyRecentExportRequest {
+  name: string;
+  group: string;
+}
+
+export interface QueryHyRecentExportResponse {
+  volume: string;
+}
+
 const baseQueryParamsRequest: object = {};
 
 export const QueryParamsRequest = {
@@ -1435,6 +1471,626 @@ export const QueryAllHyExportResponse = {
   },
 };
 
+const baseQueryHyRecentMarketsizeRequest: object = { name: "", group: "" };
+
+export const QueryHyRecentMarketsizeRequest = {
+  encode(
+    message: QueryHyRecentMarketsizeRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.group !== "") {
+      writer.uint32(18).string(message.group);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentMarketsizeRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentMarketsizeRequest,
+    } as QueryHyRecentMarketsizeRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+        case 2:
+          message.group = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentMarketsizeRequest {
+    const message = {
+      ...baseQueryHyRecentMarketsizeRequest,
+    } as QueryHyRecentMarketsizeRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = String(object.group);
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentMarketsizeRequest): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.group !== undefined && (obj.group = message.group);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentMarketsizeRequest>
+  ): QueryHyRecentMarketsizeRequest {
+    const message = {
+      ...baseQueryHyRecentMarketsizeRequest,
+    } as QueryHyRecentMarketsizeRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = object.group;
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentMarketsizeResponse: object = { volume: "" };
+
+export const QueryHyRecentMarketsizeResponse = {
+  encode(
+    message: QueryHyRecentMarketsizeResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.volume !== "") {
+      writer.uint32(10).string(message.volume);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentMarketsizeResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentMarketsizeResponse,
+    } as QueryHyRecentMarketsizeResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.volume = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentMarketsizeResponse {
+    const message = {
+      ...baseQueryHyRecentMarketsizeResponse,
+    } as QueryHyRecentMarketsizeResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = String(object.volume);
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentMarketsizeResponse): unknown {
+    const obj: any = {};
+    message.volume !== undefined && (obj.volume = message.volume);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentMarketsizeResponse>
+  ): QueryHyRecentMarketsizeResponse {
+    const message = {
+      ...baseQueryHyRecentMarketsizeResponse,
+    } as QueryHyRecentMarketsizeResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = object.volume;
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentPartnerRequest: object = { buyer: "", seller: "" };
+
+export const QueryHyRecentPartnerRequest = {
+  encode(
+    message: QueryHyRecentPartnerRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.buyer !== "") {
+      writer.uint32(10).string(message.buyer);
+    }
+    if (message.seller !== "") {
+      writer.uint32(18).string(message.seller);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentPartnerRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentPartnerRequest,
+    } as QueryHyRecentPartnerRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.buyer = reader.string();
+          break;
+        case 2:
+          message.seller = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentPartnerRequest {
+    const message = {
+      ...baseQueryHyRecentPartnerRequest,
+    } as QueryHyRecentPartnerRequest;
+    if (object.buyer !== undefined && object.buyer !== null) {
+      message.buyer = String(object.buyer);
+    } else {
+      message.buyer = "";
+    }
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = String(object.seller);
+    } else {
+      message.seller = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentPartnerRequest): unknown {
+    const obj: any = {};
+    message.buyer !== undefined && (obj.buyer = message.buyer);
+    message.seller !== undefined && (obj.seller = message.seller);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentPartnerRequest>
+  ): QueryHyRecentPartnerRequest {
+    const message = {
+      ...baseQueryHyRecentPartnerRequest,
+    } as QueryHyRecentPartnerRequest;
+    if (object.buyer !== undefined && object.buyer !== null) {
+      message.buyer = object.buyer;
+    } else {
+      message.buyer = "";
+    }
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    } else {
+      message.seller = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentPartnerResponse: object = { volume: "" };
+
+export const QueryHyRecentPartnerResponse = {
+  encode(
+    message: QueryHyRecentPartnerResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.volume !== "") {
+      writer.uint32(10).string(message.volume);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentPartnerResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentPartnerResponse,
+    } as QueryHyRecentPartnerResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.volume = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentPartnerResponse {
+    const message = {
+      ...baseQueryHyRecentPartnerResponse,
+    } as QueryHyRecentPartnerResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = String(object.volume);
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentPartnerResponse): unknown {
+    const obj: any = {};
+    message.volume !== undefined && (obj.volume = message.volume);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentPartnerResponse>
+  ): QueryHyRecentPartnerResponse {
+    const message = {
+      ...baseQueryHyRecentPartnerResponse,
+    } as QueryHyRecentPartnerResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = object.volume;
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentImportRequest: object = { name: "", group: "" };
+
+export const QueryHyRecentImportRequest = {
+  encode(
+    message: QueryHyRecentImportRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.group !== "") {
+      writer.uint32(18).string(message.group);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentImportRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentImportRequest,
+    } as QueryHyRecentImportRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+        case 2:
+          message.group = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentImportRequest {
+    const message = {
+      ...baseQueryHyRecentImportRequest,
+    } as QueryHyRecentImportRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = String(object.group);
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentImportRequest): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.group !== undefined && (obj.group = message.group);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentImportRequest>
+  ): QueryHyRecentImportRequest {
+    const message = {
+      ...baseQueryHyRecentImportRequest,
+    } as QueryHyRecentImportRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = object.group;
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentImportResponse: object = { volume: "" };
+
+export const QueryHyRecentImportResponse = {
+  encode(
+    message: QueryHyRecentImportResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.volume !== "") {
+      writer.uint32(10).string(message.volume);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentImportResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentImportResponse,
+    } as QueryHyRecentImportResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.volume = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentImportResponse {
+    const message = {
+      ...baseQueryHyRecentImportResponse,
+    } as QueryHyRecentImportResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = String(object.volume);
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentImportResponse): unknown {
+    const obj: any = {};
+    message.volume !== undefined && (obj.volume = message.volume);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentImportResponse>
+  ): QueryHyRecentImportResponse {
+    const message = {
+      ...baseQueryHyRecentImportResponse,
+    } as QueryHyRecentImportResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = object.volume;
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentExportRequest: object = { name: "", group: "" };
+
+export const QueryHyRecentExportRequest = {
+  encode(
+    message: QueryHyRecentExportRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.group !== "") {
+      writer.uint32(18).string(message.group);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentExportRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentExportRequest,
+    } as QueryHyRecentExportRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+        case 2:
+          message.group = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentExportRequest {
+    const message = {
+      ...baseQueryHyRecentExportRequest,
+    } as QueryHyRecentExportRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = String(object.group);
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentExportRequest): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.group !== undefined && (obj.group = message.group);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentExportRequest>
+  ): QueryHyRecentExportRequest {
+    const message = {
+      ...baseQueryHyRecentExportRequest,
+    } as QueryHyRecentExportRequest;
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
+    }
+    if (object.group !== undefined && object.group !== null) {
+      message.group = object.group;
+    } else {
+      message.group = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryHyRecentExportResponse: object = { volume: "" };
+
+export const QueryHyRecentExportResponse = {
+  encode(
+    message: QueryHyRecentExportResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.volume !== "") {
+      writer.uint32(10).string(message.volume);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryHyRecentExportResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryHyRecentExportResponse,
+    } as QueryHyRecentExportResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.volume = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHyRecentExportResponse {
+    const message = {
+      ...baseQueryHyRecentExportResponse,
+    } as QueryHyRecentExportResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = String(object.volume);
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryHyRecentExportResponse): unknown {
+    const obj: any = {};
+    message.volume !== undefined && (obj.volume = message.volume);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryHyRecentExportResponse>
+  ): QueryHyRecentExportResponse {
+    const message = {
+      ...baseQueryHyRecentExportResponse,
+    } as QueryHyRecentExportResponse;
+    if (object.volume !== undefined && object.volume !== null) {
+      message.volume = object.volume;
+    } else {
+      message.volume = "";
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1467,6 +2123,22 @@ export interface Query {
   HyExportAll(
     request: QueryAllHyExportRequest
   ): Promise<QueryAllHyExportResponse>;
+  /** Queries a list of HyRecentMarketsize items. */
+  HyRecentMarketsize(
+    request: QueryHyRecentMarketsizeRequest
+  ): Promise<QueryHyRecentMarketsizeResponse>;
+  /** Queries a list of HyRecentPartner items. */
+  HyRecentPartner(
+    request: QueryHyRecentPartnerRequest
+  ): Promise<QueryHyRecentPartnerResponse>;
+  /** Queries a list of HyRecentImport items. */
+  HyRecentImport(
+    request: QueryHyRecentImportRequest
+  ): Promise<QueryHyRecentImportResponse>;
+  /** Queries a list of HyRecentExport items. */
+  HyRecentExport(
+    request: QueryHyRecentExportRequest
+  ): Promise<QueryHyRecentExportResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1561,6 +2233,62 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("khidi.khidi.Query", "HyExportAll", data);
     return promise.then((data) =>
       QueryAllHyExportResponse.decode(new Reader(data))
+    );
+  }
+
+  HyRecentMarketsize(
+    request: QueryHyRecentMarketsizeRequest
+  ): Promise<QueryHyRecentMarketsizeResponse> {
+    const data = QueryHyRecentMarketsizeRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "khidi.khidi.Query",
+      "HyRecentMarketsize",
+      data
+    );
+    return promise.then((data) =>
+      QueryHyRecentMarketsizeResponse.decode(new Reader(data))
+    );
+  }
+
+  HyRecentPartner(
+    request: QueryHyRecentPartnerRequest
+  ): Promise<QueryHyRecentPartnerResponse> {
+    const data = QueryHyRecentPartnerRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "khidi.khidi.Query",
+      "HyRecentPartner",
+      data
+    );
+    return promise.then((data) =>
+      QueryHyRecentPartnerResponse.decode(new Reader(data))
+    );
+  }
+
+  HyRecentImport(
+    request: QueryHyRecentImportRequest
+  ): Promise<QueryHyRecentImportResponse> {
+    const data = QueryHyRecentImportRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "khidi.khidi.Query",
+      "HyRecentImport",
+      data
+    );
+    return promise.then((data) =>
+      QueryHyRecentImportResponse.decode(new Reader(data))
+    );
+  }
+
+  HyRecentExport(
+    request: QueryHyRecentExportRequest
+  ): Promise<QueryHyRecentExportResponse> {
+    const data = QueryHyRecentExportRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "khidi.khidi.Query",
+      "HyRecentExport",
+      data
+    );
+    return promise.then((data) =>
+      QueryHyRecentExportResponse.decode(new Reader(data))
     );
   }
 }

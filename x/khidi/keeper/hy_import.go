@@ -4,6 +4,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"khidi/x/khidi/types"
+
+	"strconv"
 )
 
 // SetHyImport set a specific hyImport in the store from its index
@@ -60,4 +62,35 @@ func (k Keeper) GetAllHyImport(ctx sdk.Context) (list []types.HyImport) {
 	}
 
 	return
+}
+
+// custom made
+func (k Keeper) GetRecentHyImport(
+	ctx sdk.Context,
+	name string,
+	group string,
+) (val types.HyImport, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.HyImportKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	recentYear := -1
+	var recentVal types.HyImport
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.HyImport
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		if val.Name == name && val.Group == group {
+			year, _ := strconv.Atoi(val.Year)
+			if year > recentYear {
+				recentYear = year
+				recentVal = val
+			}
+		}
+	}
+
+	if recentYear == 0 {
+		return val, false
+	}
+	return recentVal, true
 }

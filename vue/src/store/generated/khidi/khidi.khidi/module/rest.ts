@@ -130,6 +130,22 @@ export interface KhidiQueryGetHyPartnerResponse {
   hyPartner?: KhidiHyPartner;
 }
 
+export interface KhidiQueryHyRecentExportResponse {
+  volume?: string;
+}
+
+export interface KhidiQueryHyRecentImportResponse {
+  volume?: string;
+}
+
+export interface KhidiQueryHyRecentMarketsizeResponse {
+  volume?: string;
+}
+
+export interface KhidiQueryHyRecentPartnerResponse {
+  volume?: string;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -571,6 +587,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryHyPartner = (index: string, params: RequestParams = {}) =>
     this.request<KhidiQueryGetHyPartnerResponse, RpcStatus>({
       path: `/khidi/khidi/hy_partner/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyRecentExport
+   * @summary Queries a list of HyRecentExport items.
+   * @request GET:/khidi/khidi/hy_recent_export/{name}/{group}
+   */
+  queryHyRecentExport = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyRecentExportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_recent_export/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyRecentImport
+   * @summary Queries a list of HyRecentImport items.
+   * @request GET:/khidi/khidi/hy_recent_import/{name}/{group}
+   */
+  queryHyRecentImport = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyRecentImportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_recent_import/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyRecentMarketsize
+   * @summary Queries a list of HyRecentMarketsize items.
+   * @request GET:/khidi/khidi/hy_recent_marketsize/{name}/{group}
+   */
+  queryHyRecentMarketsize = (name: string, group: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyRecentMarketsizeResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_recent_marketsize/${name}/${group}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyRecentPartner
+   * @summary Queries a list of HyRecentPartner items.
+   * @request GET:/khidi/khidi/hy_recent_partner/{buyer}/{seller}
+   */
+  queryHyRecentPartner = (buyer: string, seller: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryHyRecentPartnerResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_recent_partner/${buyer}/${seller}`,
       method: "GET",
       format: "json",
       ...params,

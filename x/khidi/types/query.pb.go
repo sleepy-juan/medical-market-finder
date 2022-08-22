@@ -849,6 +849,390 @@ func (m *QueryAllHyExportResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryHyRecentMarketsizeRequest struct {
+	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Group string `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+}
+
+func (m *QueryHyRecentMarketsizeRequest) Reset()         { *m = QueryHyRecentMarketsizeRequest{} }
+func (m *QueryHyRecentMarketsizeRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentMarketsizeRequest) ProtoMessage()    {}
+func (*QueryHyRecentMarketsizeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{18}
+}
+func (m *QueryHyRecentMarketsizeRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentMarketsizeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentMarketsizeRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentMarketsizeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentMarketsizeRequest.Merge(m, src)
+}
+func (m *QueryHyRecentMarketsizeRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentMarketsizeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentMarketsizeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentMarketsizeRequest proto.InternalMessageInfo
+
+func (m *QueryHyRecentMarketsizeRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *QueryHyRecentMarketsizeRequest) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+type QueryHyRecentMarketsizeResponse struct {
+	Volume string `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *QueryHyRecentMarketsizeResponse) Reset()         { *m = QueryHyRecentMarketsizeResponse{} }
+func (m *QueryHyRecentMarketsizeResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentMarketsizeResponse) ProtoMessage()    {}
+func (*QueryHyRecentMarketsizeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{19}
+}
+func (m *QueryHyRecentMarketsizeResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentMarketsizeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentMarketsizeResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentMarketsizeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentMarketsizeResponse.Merge(m, src)
+}
+func (m *QueryHyRecentMarketsizeResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentMarketsizeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentMarketsizeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentMarketsizeResponse proto.InternalMessageInfo
+
+func (m *QueryHyRecentMarketsizeResponse) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type QueryHyRecentPartnerRequest struct {
+	Buyer  string `protobuf:"bytes,1,opt,name=buyer,proto3" json:"buyer,omitempty"`
+	Seller string `protobuf:"bytes,2,opt,name=seller,proto3" json:"seller,omitempty"`
+}
+
+func (m *QueryHyRecentPartnerRequest) Reset()         { *m = QueryHyRecentPartnerRequest{} }
+func (m *QueryHyRecentPartnerRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentPartnerRequest) ProtoMessage()    {}
+func (*QueryHyRecentPartnerRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{20}
+}
+func (m *QueryHyRecentPartnerRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentPartnerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentPartnerRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentPartnerRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentPartnerRequest.Merge(m, src)
+}
+func (m *QueryHyRecentPartnerRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentPartnerRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentPartnerRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentPartnerRequest proto.InternalMessageInfo
+
+func (m *QueryHyRecentPartnerRequest) GetBuyer() string {
+	if m != nil {
+		return m.Buyer
+	}
+	return ""
+}
+
+func (m *QueryHyRecentPartnerRequest) GetSeller() string {
+	if m != nil {
+		return m.Seller
+	}
+	return ""
+}
+
+type QueryHyRecentPartnerResponse struct {
+	Volume string `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *QueryHyRecentPartnerResponse) Reset()         { *m = QueryHyRecentPartnerResponse{} }
+func (m *QueryHyRecentPartnerResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentPartnerResponse) ProtoMessage()    {}
+func (*QueryHyRecentPartnerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{21}
+}
+func (m *QueryHyRecentPartnerResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentPartnerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentPartnerResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentPartnerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentPartnerResponse.Merge(m, src)
+}
+func (m *QueryHyRecentPartnerResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentPartnerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentPartnerResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentPartnerResponse proto.InternalMessageInfo
+
+func (m *QueryHyRecentPartnerResponse) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type QueryHyRecentImportRequest struct {
+	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Group string `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+}
+
+func (m *QueryHyRecentImportRequest) Reset()         { *m = QueryHyRecentImportRequest{} }
+func (m *QueryHyRecentImportRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentImportRequest) ProtoMessage()    {}
+func (*QueryHyRecentImportRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{22}
+}
+func (m *QueryHyRecentImportRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentImportRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentImportRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentImportRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentImportRequest.Merge(m, src)
+}
+func (m *QueryHyRecentImportRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentImportRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentImportRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentImportRequest proto.InternalMessageInfo
+
+func (m *QueryHyRecentImportRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *QueryHyRecentImportRequest) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+type QueryHyRecentImportResponse struct {
+	Volume string `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *QueryHyRecentImportResponse) Reset()         { *m = QueryHyRecentImportResponse{} }
+func (m *QueryHyRecentImportResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentImportResponse) ProtoMessage()    {}
+func (*QueryHyRecentImportResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{23}
+}
+func (m *QueryHyRecentImportResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentImportResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentImportResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentImportResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentImportResponse.Merge(m, src)
+}
+func (m *QueryHyRecentImportResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentImportResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentImportResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentImportResponse proto.InternalMessageInfo
+
+func (m *QueryHyRecentImportResponse) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type QueryHyRecentExportRequest struct {
+	Name  string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Group string `protobuf:"bytes,2,opt,name=group,proto3" json:"group,omitempty"`
+}
+
+func (m *QueryHyRecentExportRequest) Reset()         { *m = QueryHyRecentExportRequest{} }
+func (m *QueryHyRecentExportRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentExportRequest) ProtoMessage()    {}
+func (*QueryHyRecentExportRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{24}
+}
+func (m *QueryHyRecentExportRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentExportRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentExportRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentExportRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentExportRequest.Merge(m, src)
+}
+func (m *QueryHyRecentExportRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentExportRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentExportRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentExportRequest proto.InternalMessageInfo
+
+func (m *QueryHyRecentExportRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *QueryHyRecentExportRequest) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+type QueryHyRecentExportResponse struct {
+	Volume string `protobuf:"bytes,1,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *QueryHyRecentExportResponse) Reset()         { *m = QueryHyRecentExportResponse{} }
+func (m *QueryHyRecentExportResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryHyRecentExportResponse) ProtoMessage()    {}
+func (*QueryHyRecentExportResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f630ab15a38f92db, []int{25}
+}
+func (m *QueryHyRecentExportResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryHyRecentExportResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryHyRecentExportResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryHyRecentExportResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryHyRecentExportResponse.Merge(m, src)
+}
+func (m *QueryHyRecentExportResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryHyRecentExportResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryHyRecentExportResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryHyRecentExportResponse proto.InternalMessageInfo
+
+func (m *QueryHyRecentExportResponse) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "khidi.khidi.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "khidi.khidi.QueryParamsResponse")
@@ -868,62 +1252,86 @@ func init() {
 	proto.RegisterType((*QueryGetHyExportResponse)(nil), "khidi.khidi.QueryGetHyExportResponse")
 	proto.RegisterType((*QueryAllHyExportRequest)(nil), "khidi.khidi.QueryAllHyExportRequest")
 	proto.RegisterType((*QueryAllHyExportResponse)(nil), "khidi.khidi.QueryAllHyExportResponse")
+	proto.RegisterType((*QueryHyRecentMarketsizeRequest)(nil), "khidi.khidi.QueryHyRecentMarketsizeRequest")
+	proto.RegisterType((*QueryHyRecentMarketsizeResponse)(nil), "khidi.khidi.QueryHyRecentMarketsizeResponse")
+	proto.RegisterType((*QueryHyRecentPartnerRequest)(nil), "khidi.khidi.QueryHyRecentPartnerRequest")
+	proto.RegisterType((*QueryHyRecentPartnerResponse)(nil), "khidi.khidi.QueryHyRecentPartnerResponse")
+	proto.RegisterType((*QueryHyRecentImportRequest)(nil), "khidi.khidi.QueryHyRecentImportRequest")
+	proto.RegisterType((*QueryHyRecentImportResponse)(nil), "khidi.khidi.QueryHyRecentImportResponse")
+	proto.RegisterType((*QueryHyRecentExportRequest)(nil), "khidi.khidi.QueryHyRecentExportRequest")
+	proto.RegisterType((*QueryHyRecentExportResponse)(nil), "khidi.khidi.QueryHyRecentExportResponse")
 }
 
 func init() { proto.RegisterFile("khidi/query.proto", fileDescriptor_f630ab15a38f92db) }
 
 var fileDescriptor_f630ab15a38f92db = []byte{
-	// 800 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x96, 0xcf, 0x4f, 0x13, 0x41,
-	0x14, 0xc7, 0xbb, 0x54, 0x08, 0x1d, 0x48, 0x8c, 0x53, 0x7e, 0x75, 0x21, 0x5b, 0x9c, 0xf0, 0x4b,
-	0x12, 0x77, 0x05, 0x0e, 0x26, 0xde, 0xc0, 0x28, 0x78, 0x30, 0xc1, 0x7a, 0x30, 0xf1, 0x62, 0xb6,
-	0x30, 0x69, 0x37, 0xb4, 0xbb, 0xcb, 0xee, 0x62, 0x5a, 0x8c, 0x9a, 0xe8, 0xcd, 0x8b, 0x24, 0x5e,
-	0x3d, 0xf8, 0x07, 0xf8, 0x87, 0x70, 0x24, 0xf1, 0xe2, 0xc9, 0x18, 0xf0, 0x0f, 0x31, 0x9d, 0x79,
-	0xbb, 0xdd, 0x69, 0x67, 0x5a, 0x9a, 0x94, 0x0b, 0xa1, 0x6f, 0xde, 0x9b, 0xf7, 0xf9, 0xbe, 0xef,
-	0xee, 0xcc, 0xa2, 0x3b, 0x47, 0x55, 0xe7, 0xd0, 0xb1, 0x8e, 0x4f, 0x68, 0xd0, 0x34, 0xfd, 0xc0,
-	0x8b, 0x3c, 0x3c, 0xc1, 0x42, 0x26, 0xfb, 0xab, 0x4f, 0x55, 0xbc, 0x8a, 0xc7, 0xe2, 0x56, 0xeb,
-	0x3f, 0x9e, 0xa2, 0x2f, 0x54, 0x3c, 0xaf, 0x52, 0xa3, 0x96, 0xed, 0x3b, 0x96, 0xed, 0xba, 0x5e,
-	0x64, 0x47, 0x8e, 0xe7, 0x86, 0xb0, 0xba, 0x7e, 0xe0, 0x85, 0x75, 0x2f, 0xb4, 0xca, 0x76, 0x48,
-	0xf9, 0xce, 0xd6, 0xdb, 0x8d, 0x32, 0x8d, 0xec, 0x0d, 0xcb, 0xb7, 0x2b, 0x8e, 0xcb, 0x92, 0x21,
-	0x17, 0xf3, 0xfe, 0xbe, 0x1d, 0xd8, 0xf5, 0xb8, 0xbe, 0xc0, 0x63, 0xd5, 0xe6, 0x9b, 0xba, 0x1d,
-	0x1c, 0xd1, 0x28, 0x74, 0x4e, 0x29, 0x2c, 0xcd, 0x24, 0x4b, 0xbe, 0x1d, 0x44, 0x2e, 0x0d, 0x20,
-	0x3e, 0x9d, 0xc4, 0x9d, 0xba, 0xef, 0x05, 0x51, 0x57, 0x98, 0x36, 0xda, 0x61, 0x32, 0x85, 0xf0,
-	0x8b, 0x16, 0xd6, 0x3e, 0xeb, 0x5a, 0xa2, 0xc7, 0x27, 0x34, 0x8c, 0xc8, 0x1e, 0xca, 0x0b, 0xd1,
-	0xd0, 0xf7, 0xdc, 0x90, 0xe2, 0x0d, 0x34, 0xc6, 0xe9, 0xe6, 0xb4, 0x45, 0x6d, 0x6d, 0x62, 0x33,
-	0x6f, 0xa6, 0xe6, 0x63, 0xf2, 0xe4, 0x9d, 0x5b, 0xe7, 0x7f, 0x8a, 0x99, 0x12, 0x24, 0x92, 0x2d,
-	0x34, 0xcf, 0x76, 0xda, 0xa5, 0xd1, 0x5e, 0xf3, 0x79, 0xa2, 0x01, 0x1a, 0xe1, 0x29, 0x34, 0xea,
-	0xb8, 0x87, 0xb4, 0xc1, 0x36, 0xcc, 0x95, 0xf8, 0x0f, 0x72, 0x80, 0x16, 0xe4, 0x45, 0xc0, 0xf1,
-	0x18, 0x4d, 0x56, 0x53, 0x71, 0xa0, 0x29, 0x08, 0x34, 0xe9, 0x42, 0x60, 0x12, 0x8a, 0x08, 0x05,
-	0xb2, 0xed, 0x5a, 0x4d, 0x46, 0xf6, 0x14, 0xa1, 0xb6, 0x43, 0xd0, 0x61, 0xc5, 0xe4, 0x76, 0x9a,
-	0x2d, 0x3b, 0x4d, 0xfe, 0xa0, 0x80, 0x9d, 0xe6, 0xbe, 0x5d, 0x89, 0x6b, 0x4b, 0xa9, 0x4a, 0xf2,
-	0x53, 0x03, 0x31, 0x5d, 0x7d, 0x94, 0x62, 0xb2, 0x03, 0x8b, 0xc1, 0xbb, 0x02, 0xed, 0x08, 0xa3,
-	0x5d, 0xed, 0x4b, 0xcb, 0x09, 0x04, 0xdc, 0x07, 0x68, 0xae, 0x3d, 0xfa, 0x7d, 0xfe, 0x60, 0xf5,
-	0x36, 0xeb, 0x15, 0x2a, 0x48, 0x2a, 0x40, 0xdc, 0x23, 0x94, 0xab, 0xc6, 0x41, 0x18, 0xe2, 0x4c,
-	0x87, 0x32, 0x58, 0x05, 0x59, 0xed, 0x74, 0x52, 0x06, 0x14, 0x36, 0xb8, 0x0e, 0x94, 0x61, 0xb9,
-	0xf3, 0x43, 0x03, 0x7a, 0xb1, 0x89, 0x9c, 0x3e, 0x3b, 0x00, 0xfd, 0xf0, 0x1c, 0xb1, 0xd0, 0x6c,
-	0x7b, 0xbe, 0xcf, 0xd8, 0x2b, 0xdd, 0xdb, 0x90, 0x97, 0x69, 0x0b, 0xe3, 0x02, 0x50, 0xf4, 0x10,
-	0x8d, 0x57, 0x21, 0x06, 0x53, 0x9b, 0xee, 0x10, 0xc4, 0x17, 0x41, 0x4f, 0x92, 0x4c, 0x6c, 0xa0,
-	0x60, 0x73, 0x12, 0x29, 0x86, 0xe5, 0xc5, 0x77, 0x2d, 0x6d, 0x78, 0x4f, 0xf0, 0xec, 0xb5, 0xc1,
-	0x6f, 0xc8, 0x87, 0x27, 0x8d, 0x01, 0x7d, 0x88, 0x0b, 0xd2, 0x72, 0x78, 0x4c, 0xe1, 0x03, 0x5f,
-	0x6c, 0xcb, 0xe1, 0xbf, 0x45, 0x1f, 0x44, 0x8a, 0x9b, 0xf1, 0xa1, 0x27, 0x78, 0xf6, 0xda, 0xe0,
-	0x43, 0xf3, 0x61, 0xf3, 0x2c, 0x87, 0x46, 0x19, 0x1e, 0xae, 0xa2, 0x31, 0x7e, 0xe7, 0xe0, 0xa2,
-	0xc0, 0xd0, 0x7d, 0xa1, 0xe9, 0x8b, 0xea, 0x04, 0xde, 0x82, 0xcc, 0x7f, 0xfa, 0xf5, 0xef, 0xdb,
-	0xc8, 0x34, 0xce, 0x5b, 0xfc, 0xa2, 0x4c, 0x5f, 0xc6, 0xf8, 0xab, 0x86, 0x26, 0xd3, 0x67, 0x30,
-	0x5e, 0xeb, 0xde, 0x4f, 0x7e, 0xc3, 0xe9, 0xf7, 0xae, 0x91, 0x09, 0x08, 0xeb, 0x0c, 0x61, 0x09,
-	0x13, 0x01, 0x41, 0xb8, 0xfb, 0xad, 0x77, 0xec, 0xd9, 0x7a, 0x8f, 0xbf, 0x68, 0xe8, 0x76, 0x7a,
-	0x93, 0xed, 0x5a, 0x4d, 0x06, 0x25, 0xbf, 0xdc, 0x64, 0x50, 0x8a, 0xeb, 0x89, 0x10, 0x06, 0xb5,
-	0x80, 0x75, 0x35, 0x14, 0xfe, 0xac, 0xa1, 0x5c, 0x72, 0x14, 0xe2, 0x65, 0x85, 0x62, 0xf1, 0x08,
-	0xd7, 0x57, 0xfa, 0xa5, 0x01, 0xc0, 0x2a, 0x03, 0xb8, 0x8b, 0x8b, 0x9d, 0x00, 0xf0, 0xd9, 0x93,
-	0x8c, 0xe4, 0x43, 0xcb, 0x23, 0xa8, 0x6e, 0x8d, 0x63, 0x59, 0x21, 0xb2, 0x3f, 0x87, 0xec, 0x32,
-	0x20, 0x45, 0xc6, 0x51, 0xc0, 0xb3, 0x0a, 0x0e, 0xfc, 0x11, 0x8d, 0xc7, 0xa7, 0x10, 0x5e, 0x52,
-	0x88, 0x13, 0x4e, 0x4e, 0x7d, 0xb9, 0x4f, 0x16, 0x74, 0x5e, 0x61, 0x9d, 0x17, 0xb1, 0xd1, 0xd9,
-	0x99, 0x7f, 0xe0, 0x25, 0x03, 0x38, 0x45, 0x13, 0x71, 0x6d, 0x4b, 0xff, 0x92, 0x42, 0x58, 0x5f,
-	0x06, 0xc9, 0xf9, 0x4b, 0x0c, 0xc6, 0x30, 0x87, 0x67, 0xe4, 0x0c, 0x5c, 0x3c, 0xbc, 0xea, 0x2a,
-	0xf1, 0xc2, 0x71, 0xa5, 0x14, 0x2f, 0x1e, 0x38, 0x6a, 0xf1, 0xfc, 0x33, 0x56, 0x14, 0xcf, 0x6b,
-	0x7b, 0x89, 0xef, 0xcb, 0x20, 0x39, 0xf4, 0xd4, 0xe2, 0x39, 0xc3, 0xce, 0xfd, 0xf3, 0x4b, 0x43,
-	0xbb, 0xb8, 0x34, 0xb4, 0xbf, 0x97, 0x86, 0x76, 0x76, 0x65, 0x64, 0x2e, 0xae, 0x8c, 0xcc, 0xef,
-	0x2b, 0x23, 0xf3, 0x3a, 0xcf, 0x53, 0x1b, 0x50, 0x12, 0x35, 0x7d, 0x1a, 0x96, 0xc7, 0xd8, 0xa7,
-	0xf7, 0xd6, 0xff, 0x00, 0x00, 0x00, 0xff, 0xff, 0x67, 0x2f, 0xae, 0xd0, 0x71, 0x0c, 0x00, 0x00,
+	// 1050 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x98, 0xcf, 0x6f, 0xdc, 0x44,
+	0x14, 0xc7, 0xe3, 0xa6, 0x8d, 0xba, 0x93, 0xaa, 0x88, 0x97, 0x1f, 0x4d, 0xdc, 0xc8, 0x1b, 0x46,
+	0xf9, 0x45, 0x29, 0x76, 0x93, 0x02, 0x05, 0x6e, 0x2d, 0xa2, 0x0d, 0x20, 0xa4, 0xb0, 0x1c, 0x90,
+	0xb8, 0x20, 0x6f, 0x3a, 0xda, 0xb5, 0xea, 0xb5, 0x5d, 0xdb, 0x5b, 0xed, 0x36, 0x5a, 0x90, 0xe0,
+	0xc6, 0x05, 0x24, 0x24, 0x24, 0x24, 0x24, 0xb8, 0x22, 0xf1, 0x87, 0xf4, 0x58, 0x89, 0x0b, 0x27,
+	0x84, 0x12, 0xfe, 0x10, 0xe4, 0x99, 0x67, 0xaf, 0xc7, 0xf6, 0xac, 0x37, 0xd5, 0xf6, 0x52, 0xad,
+	0x67, 0xde, 0x9b, 0xf7, 0xf9, 0xce, 0x9b, 0x79, 0x6f, 0x1a, 0xf2, 0xea, 0xa3, 0xae, 0xf3, 0xd0,
+	0xb1, 0x1e, 0xf7, 0x59, 0x38, 0x34, 0x83, 0xd0, 0x8f, 0x7d, 0x58, 0xe4, 0x43, 0x26, 0xff, 0x57,
+	0x5f, 0xee, 0xf8, 0x1d, 0x9f, 0x8f, 0x5b, 0xc9, 0x2f, 0x61, 0xa2, 0x6f, 0x74, 0x7c, 0xbf, 0xe3,
+	0x32, 0xcb, 0x0e, 0x1c, 0xcb, 0xf6, 0x3c, 0x3f, 0xb6, 0x63, 0xc7, 0xf7, 0x22, 0x9c, 0xbd, 0x71,
+	0xec, 0x47, 0x3d, 0x3f, 0xb2, 0xda, 0x76, 0xc4, 0xc4, 0xca, 0xd6, 0x93, 0xfd, 0x36, 0x8b, 0xed,
+	0x7d, 0x2b, 0xb0, 0x3b, 0x8e, 0xc7, 0x8d, 0xd1, 0x16, 0x44, 0xfc, 0xc0, 0x0e, 0xed, 0x5e, 0xea,
+	0xbf, 0x2e, 0xc6, 0xba, 0xc3, 0xaf, 0x7a, 0x76, 0xf8, 0x88, 0xc5, 0x91, 0xf3, 0x94, 0xe1, 0xd4,
+	0x6a, 0x36, 0x15, 0xd8, 0x61, 0xec, 0xb1, 0x10, 0xc7, 0x57, 0xb2, 0x71, 0xa7, 0x17, 0xf8, 0x61,
+	0x5c, 0x1a, 0x66, 0x83, 0xf1, 0x30, 0x5d, 0x26, 0xf0, 0x59, 0x82, 0x75, 0xc4, 0xa3, 0xb6, 0xd8,
+	0xe3, 0x3e, 0x8b, 0x62, 0x7a, 0x48, 0x96, 0xa4, 0xd1, 0x28, 0xf0, 0xbd, 0x88, 0xc1, 0x3e, 0x59,
+	0x10, 0x74, 0x6b, 0xda, 0xa6, 0xb6, 0xb7, 0x78, 0xb0, 0x64, 0xe6, 0xf6, 0xc7, 0x14, 0xc6, 0xf7,
+	0x2e, 0x3e, 0xfb, 0xa7, 0x39, 0xd7, 0x42, 0x43, 0x7a, 0x9b, 0x5c, 0xe7, 0x2b, 0x3d, 0x60, 0xf1,
+	0xe1, 0xf0, 0xd3, 0x4c, 0x03, 0x06, 0x82, 0x65, 0x72, 0xc9, 0xf1, 0x1e, 0xb2, 0x01, 0x5f, 0xb0,
+	0xd1, 0x12, 0x1f, 0xf4, 0x98, 0x6c, 0x54, 0x3b, 0x21, 0xc7, 0x07, 0xe4, 0x4a, 0x37, 0x37, 0x8e,
+	0x34, 0xeb, 0x12, 0x4d, 0xde, 0x11, 0x99, 0x24, 0x27, 0xca, 0x90, 0xec, 0xae, 0xeb, 0x56, 0x91,
+	0xdd, 0x27, 0x64, 0x9c, 0x21, 0x8c, 0xb0, 0x63, 0x8a, 0x74, 0x9a, 0x49, 0x3a, 0x4d, 0x71, 0x50,
+	0x30, 0x9d, 0xe6, 0x91, 0xdd, 0x49, 0x7d, 0x5b, 0x39, 0x4f, 0xfa, 0xa7, 0x86, 0x62, 0x4a, 0x71,
+	0x94, 0x62, 0xe6, 0xcf, 0x2d, 0x06, 0x1e, 0x48, 0xb4, 0x17, 0x38, 0xed, 0x6e, 0x2d, 0xad, 0x20,
+	0x90, 0x70, 0x6f, 0x91, 0xb5, 0xf1, 0xd6, 0x1f, 0x89, 0x83, 0x35, 0x39, 0x59, 0x5f, 0x90, 0xf5,
+	0x0a, 0x0f, 0x14, 0xf7, 0x3e, 0x69, 0x74, 0xd3, 0x41, 0xdc, 0xc4, 0xd5, 0x82, 0x32, 0x9c, 0x45,
+	0x59, 0x63, 0x73, 0xda, 0x46, 0x14, 0xbe, 0x71, 0x05, 0x94, 0x59, 0x65, 0xe7, 0x77, 0x0d, 0xe9,
+	0xe5, 0x20, 0xd5, 0xf4, 0xf3, 0xe7, 0xa0, 0x9f, 0x5d, 0x46, 0x2c, 0x72, 0x6d, 0xbc, 0xbf, 0x1f,
+	0xf1, 0x2b, 0x3d, 0x39, 0x21, 0x9f, 0xe7, 0x53, 0x98, 0x3a, 0xa0, 0xa2, 0x3b, 0xe4, 0x72, 0x17,
+	0xc7, 0x70, 0xd7, 0x56, 0x0a, 0x82, 0xc4, 0x24, 0xea, 0xc9, 0x8c, 0xa9, 0x8d, 0x14, 0x7c, 0x9f,
+	0x64, 0x8a, 0x59, 0xe5, 0xe2, 0x57, 0x2d, 0x9f, 0xf0, 0x89, 0xe0, 0xf3, 0x53, 0x83, 0xbf, 0xa4,
+	0x3c, 0x7c, 0x38, 0x38, 0x67, 0x1e, 0x52, 0x87, 0xbc, 0x1c, 0x31, 0xa6, 0xc8, 0x83, 0x98, 0x1c,
+	0xcb, 0x11, 0xdf, 0x72, 0x1e, 0x64, 0x8a, 0x97, 0x93, 0x87, 0x89, 0xe0, 0xf3, 0x53, 0x83, 0xcf,
+	0x2e, 0x0f, 0x1f, 0x13, 0x83, 0xd3, 0x1d, 0x0e, 0x5b, 0xec, 0x98, 0x79, 0x71, 0xb9, 0x74, 0x03,
+	0xb9, 0xe8, 0xd9, 0x3d, 0x86, 0xd9, 0xe0, 0xbf, 0x93, 0x14, 0x75, 0x42, 0xbf, 0x1f, 0xf0, 0xc8,
+	0x8d, 0x96, 0xf8, 0xa0, 0xef, 0x91, 0xa6, 0x72, 0x2d, 0x14, 0xbc, 0x4a, 0x16, 0x9e, 0xf8, 0x6e,
+	0x3f, 0x5b, 0x0e, 0xbf, 0xe8, 0x27, 0xd8, 0x3e, 0x52, 0xd7, 0x72, 0xad, 0x6c, 0xf7, 0x87, 0x58,
+	0xf4, 0x1a, 0x2d, 0xf1, 0x91, 0x2c, 0x16, 0x31, 0xd7, 0x65, 0x21, 0x62, 0xe0, 0x17, 0x7d, 0x07,
+	0x7b, 0x44, 0x69, 0xb1, 0x1a, 0x88, 0xfb, 0x44, 0x97, 0xfc, 0xe4, 0x8b, 0x39, 0xfd, 0x3e, 0xbc,
+	0x5d, 0x10, 0x53, 0xb8, 0x7c, 0xd3, 0x86, 0x97, 0xcf, 0xe3, 0x8b, 0x87, 0x2f, 0x9c, 0x39, 0x45,
+	0xf8, 0x83, 0x9f, 0xaf, 0x92, 0x4b, 0xdc, 0x0f, 0xba, 0x64, 0x41, 0xbc, 0x3e, 0xa0, 0x29, 0x9d,
+	0xc6, 0xf2, 0xd3, 0x46, 0xdf, 0x54, 0x1b, 0x88, 0x70, 0xf4, 0xfa, 0xb7, 0x7f, 0xfd, 0xf7, 0xd3,
+	0x85, 0x15, 0x58, 0xb2, 0xc4, 0x93, 0x29, 0xff, 0x2c, 0x83, 0x1f, 0x34, 0x72, 0x25, 0xdf, 0x8d,
+	0x61, 0xaf, 0xbc, 0x5e, 0xf5, 0x5b, 0x47, 0x7f, 0x7d, 0x0a, 0x4b, 0x44, 0xb8, 0xc1, 0x11, 0xb6,
+	0x80, 0x4a, 0x08, 0xd2, 0x2b, 0xd0, 0x3a, 0xe1, 0x55, 0x66, 0x04, 0xdf, 0x6b, 0xe4, 0x95, 0xfc,
+	0x22, 0x77, 0x5d, 0xb7, 0x0a, 0xaa, 0xfa, 0x99, 0x53, 0x05, 0xa5, 0x78, 0xa8, 0x50, 0xca, 0xa1,
+	0x36, 0x40, 0x57, 0x43, 0xc1, 0x77, 0x1a, 0x69, 0x64, 0x4d, 0x11, 0xb6, 0x15, 0x8a, 0xe5, 0xbb,
+	0xa2, 0xef, 0xd4, 0x99, 0x21, 0xc0, 0x2e, 0x07, 0x78, 0x0d, 0x9a, 0x45, 0x00, 0x7c, 0x00, 0x67,
+	0x5b, 0xf2, 0x75, 0x92, 0x23, 0xf4, 0x4e, 0xb6, 0x63, 0x5b, 0x21, 0xb2, 0x9e, 0xa3, 0xea, 0x59,
+	0x40, 0x9b, 0x9c, 0x63, 0x1d, 0xae, 0x29, 0x38, 0xe0, 0x1b, 0x72, 0x39, 0xed, 0x47, 0xb0, 0xa5,
+	0x10, 0x27, 0x5d, 0x55, 0x7d, 0xbb, 0xc6, 0x0a, 0x23, 0xef, 0xf0, 0xc8, 0x9b, 0x60, 0x14, 0x23,
+	0x8b, 0xa7, 0x7e, 0xb6, 0x01, 0x4f, 0xc9, 0x62, 0xea, 0x9b, 0xe8, 0xdf, 0x52, 0x08, 0xab, 0x65,
+	0xa8, 0xe8, 0xc4, 0xd4, 0xe0, 0x0c, 0x6b, 0xb0, 0x5a, 0xcd, 0x20, 0xc4, 0x63, 0xd1, 0x57, 0x89,
+	0x97, 0x0a, 0x85, 0x52, 0xbc, 0x5c, 0x06, 0xd4, 0xe2, 0xc5, 0x7f, 0x68, 0x64, 0xf1, 0xc2, 0x77,
+	0x92, 0xf8, 0x5a, 0x86, 0x8a, 0xf6, 0xa7, 0x16, 0x2f, 0x18, 0xe0, 0x0f, 0x8d, 0x40, 0xb9, 0x99,
+	0xc0, 0x1b, 0xe5, 0xd5, 0x95, 0xed, 0x4b, 0xbf, 0x39, 0x9d, 0x31, 0x12, 0xbd, 0xcb, 0x89, 0x0e,
+	0xe0, 0x56, 0x91, 0x28, 0xe4, 0x1e, 0x52, 0xc5, 0x48, 0x4a, 0xf0, 0xc8, 0x3a, 0xe1, 0x45, 0x77,
+	0x04, 0xbf, 0xf1, 0xc2, 0x21, 0x35, 0x9c, 0xaa, 0xc2, 0x51, 0xdd, 0xe0, 0xaa, 0x0a, 0x87, 0xa2,
+	0x7b, 0xd1, 0x3b, 0x1c, 0x71, 0x1f, 0x2c, 0x05, 0x62, 0x76, 0x7d, 0x79, 0x93, 0x1c, 0x59, 0x27,
+	0xa2, 0x2b, 0x8e, 0xe0, 0x17, 0x8d, 0x5c, 0x95, 0x5b, 0x12, 0xec, 0xaa, 0xc3, 0xca, 0xa7, 0x79,
+	0xaf, 0xde, 0x10, 0xf1, 0xde, 0xe2, 0x78, 0x26, 0xdc, 0x54, 0xe0, 0xa5, 0x77, 0x4b, 0xde, 0xbd,
+	0x3c, 0x1b, 0x9e, 0xf6, 0x09, 0x6c, 0xf2, 0x61, 0xdb, 0xab, 0x37, 0x9c, 0x92, 0x2d, 0x3d, 0xfa,
+	0x12, 0xdb, 0xbd, 0x37, 0x9f, 0x9d, 0x1a, 0xda, 0xf3, 0x53, 0x43, 0xfb, 0xf7, 0xd4, 0xd0, 0x7e,
+	0x3c, 0x33, 0xe6, 0x9e, 0x9f, 0x19, 0x73, 0x7f, 0x9f, 0x19, 0x73, 0x5f, 0x2e, 0x89, 0x05, 0x06,
+	0xb8, 0x50, 0x3c, 0x0c, 0x58, 0xd4, 0x5e, 0xe0, 0x7f, 0x0a, 0xb8, 0xfd, 0x7f, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0x28, 0x19, 0x63, 0x10, 0x01, 0x11, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -956,6 +1364,14 @@ type QueryClient interface {
 	HyExport(ctx context.Context, in *QueryGetHyExportRequest, opts ...grpc.CallOption) (*QueryGetHyExportResponse, error)
 	// Queries a list of HyExport items.
 	HyExportAll(ctx context.Context, in *QueryAllHyExportRequest, opts ...grpc.CallOption) (*QueryAllHyExportResponse, error)
+	// Queries a list of HyRecentMarketsize items.
+	HyRecentMarketsize(ctx context.Context, in *QueryHyRecentMarketsizeRequest, opts ...grpc.CallOption) (*QueryHyRecentMarketsizeResponse, error)
+	// Queries a list of HyRecentPartner items.
+	HyRecentPartner(ctx context.Context, in *QueryHyRecentPartnerRequest, opts ...grpc.CallOption) (*QueryHyRecentPartnerResponse, error)
+	// Queries a list of HyRecentImport items.
+	HyRecentImport(ctx context.Context, in *QueryHyRecentImportRequest, opts ...grpc.CallOption) (*QueryHyRecentImportResponse, error)
+	// Queries a list of HyRecentExport items.
+	HyRecentExport(ctx context.Context, in *QueryHyRecentExportRequest, opts ...grpc.CallOption) (*QueryHyRecentExportResponse, error)
 }
 
 type queryClient struct {
@@ -1047,6 +1463,42 @@ func (c *queryClient) HyExportAll(ctx context.Context, in *QueryAllHyExportReque
 	return out, nil
 }
 
+func (c *queryClient) HyRecentMarketsize(ctx context.Context, in *QueryHyRecentMarketsizeRequest, opts ...grpc.CallOption) (*QueryHyRecentMarketsizeResponse, error) {
+	out := new(QueryHyRecentMarketsizeResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Query/HyRecentMarketsize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) HyRecentPartner(ctx context.Context, in *QueryHyRecentPartnerRequest, opts ...grpc.CallOption) (*QueryHyRecentPartnerResponse, error) {
+	out := new(QueryHyRecentPartnerResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Query/HyRecentPartner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) HyRecentImport(ctx context.Context, in *QueryHyRecentImportRequest, opts ...grpc.CallOption) (*QueryHyRecentImportResponse, error) {
+	out := new(QueryHyRecentImportResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Query/HyRecentImport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) HyRecentExport(ctx context.Context, in *QueryHyRecentExportRequest, opts ...grpc.CallOption) (*QueryHyRecentExportResponse, error) {
+	out := new(QueryHyRecentExportResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Query/HyRecentExport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -1067,6 +1519,14 @@ type QueryServer interface {
 	HyExport(context.Context, *QueryGetHyExportRequest) (*QueryGetHyExportResponse, error)
 	// Queries a list of HyExport items.
 	HyExportAll(context.Context, *QueryAllHyExportRequest) (*QueryAllHyExportResponse, error)
+	// Queries a list of HyRecentMarketsize items.
+	HyRecentMarketsize(context.Context, *QueryHyRecentMarketsizeRequest) (*QueryHyRecentMarketsizeResponse, error)
+	// Queries a list of HyRecentPartner items.
+	HyRecentPartner(context.Context, *QueryHyRecentPartnerRequest) (*QueryHyRecentPartnerResponse, error)
+	// Queries a list of HyRecentImport items.
+	HyRecentImport(context.Context, *QueryHyRecentImportRequest) (*QueryHyRecentImportResponse, error)
+	// Queries a list of HyRecentExport items.
+	HyRecentExport(context.Context, *QueryHyRecentExportRequest) (*QueryHyRecentExportResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -1099,6 +1559,18 @@ func (*UnimplementedQueryServer) HyExport(ctx context.Context, req *QueryGetHyEx
 }
 func (*UnimplementedQueryServer) HyExportAll(ctx context.Context, req *QueryAllHyExportRequest) (*QueryAllHyExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HyExportAll not implemented")
+}
+func (*UnimplementedQueryServer) HyRecentMarketsize(ctx context.Context, req *QueryHyRecentMarketsizeRequest) (*QueryHyRecentMarketsizeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyRecentMarketsize not implemented")
+}
+func (*UnimplementedQueryServer) HyRecentPartner(ctx context.Context, req *QueryHyRecentPartnerRequest) (*QueryHyRecentPartnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyRecentPartner not implemented")
+}
+func (*UnimplementedQueryServer) HyRecentImport(ctx context.Context, req *QueryHyRecentImportRequest) (*QueryHyRecentImportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyRecentImport not implemented")
+}
+func (*UnimplementedQueryServer) HyRecentExport(ctx context.Context, req *QueryHyRecentExportRequest) (*QueryHyRecentExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyRecentExport not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -1267,6 +1739,78 @@ func _Query_HyExportAll_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_HyRecentMarketsize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHyRecentMarketsizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).HyRecentMarketsize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Query/HyRecentMarketsize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).HyRecentMarketsize(ctx, req.(*QueryHyRecentMarketsizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_HyRecentPartner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHyRecentPartnerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).HyRecentPartner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Query/HyRecentPartner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).HyRecentPartner(ctx, req.(*QueryHyRecentPartnerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_HyRecentImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHyRecentImportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).HyRecentImport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Query/HyRecentImport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).HyRecentImport(ctx, req.(*QueryHyRecentImportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_HyRecentExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryHyRecentExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).HyRecentExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Query/HyRecentExport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).HyRecentExport(ctx, req.(*QueryHyRecentExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "khidi.khidi.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -1306,6 +1850,22 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HyExportAll",
 			Handler:    _Query_HyExportAll_Handler,
+		},
+		{
+			MethodName: "HyRecentMarketsize",
+			Handler:    _Query_HyRecentMarketsize_Handler,
+		},
+		{
+			MethodName: "HyRecentPartner",
+			Handler:    _Query_HyRecentPartner_Handler,
+		},
+		{
+			MethodName: "HyRecentImport",
+			Handler:    _Query_HyRecentImport_Handler,
+		},
+		{
+			MethodName: "HyRecentExport",
+			Handler:    _Query_HyRecentExport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1956,6 +2516,274 @@ func (m *QueryAllHyExportResponse) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryHyRecentMarketsizeRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentMarketsizeRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentMarketsizeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentMarketsizeResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentMarketsizeResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentMarketsizeResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentPartnerRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentPartnerRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentPartnerRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Seller) > 0 {
+		i -= len(m.Seller)
+		copy(dAtA[i:], m.Seller)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Seller)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Buyer) > 0 {
+		i -= len(m.Buyer)
+		copy(dAtA[i:], m.Buyer)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Buyer)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentPartnerResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentPartnerResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentPartnerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentImportRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentImportRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentImportRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentImportResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentImportResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentImportResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentExportRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentExportRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentExportRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryHyRecentExportResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryHyRecentExportResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryHyRecentExportResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -2206,6 +3034,126 @@ func (m *QueryAllHyExportResponse) Size() (n int) {
 	}
 	if m.Pagination != nil {
 		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentMarketsizeRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentMarketsizeResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentPartnerRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Buyer)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Seller)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentPartnerResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentImportRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentImportResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentExportRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryHyRecentExportResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Volume)
+	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
@@ -3812,6 +4760,790 @@ func (m *QueryAllHyExportResponse) Unmarshal(dAtA []byte) error {
 			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentMarketsizeRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentMarketsizeRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentMarketsizeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentMarketsizeResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentMarketsizeResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentMarketsizeResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentPartnerRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentPartnerRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentPartnerRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Buyer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Buyer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Seller", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Seller = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentPartnerResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentPartnerResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentPartnerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentImportRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentImportRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentImportRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentImportResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentImportResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentImportResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentExportRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentExportRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentExportRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryHyRecentExportResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryHyRecentExportResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryHyRecentExportResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
