@@ -173,6 +173,100 @@ function makeRadar(country1, country2,scoreArray1,scoreArray2){
     });
 }
 
+function render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores){
+    allData = preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores);
+    //[marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
+    makeLines(country1,country2,marketSizeArray1,marketSizeArray2,yearArray);
+    makePies(country1,"pie1",partnerArray1,qualityArray1,proportionArray1);
+    makePies(country2,"pie2",partnerArray2,qualityArray2,proportionArray2);
+    makeRadar(countr1,countr2,scoreArray1,scoreArray2);
+}
+
+function preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores){
+    var marketSizeArray1 = [];
+    var marketSizeArray2 = [];
+    var marketSizeYears=[];
+    var processObject = {};
+    hyMarketSize.forEach((data)=>{
+        var year = data.year;
+        if(data.group!=group) return;
+        if(data.name===country1 || data.name===country2){
+            if(processObject[year]){
+                processObject[year][data.name]=data.volume;
+            }
+            else{
+                processObject[year] = {}
+                processObject[year][data.name]=data.volume;
+            }
+        }
+    })
+    for(var [key, value] of Object.entries(processObject)){
+        if(value.length<2){
+            processObject[key]=null;
+        }
+    }
+    for(var [key, value] of Object.entries(processObject)){
+        marketSizeYears.push(key);
+    }
+    marketSizeYears.sort();
+    marketSizeYears.forEach((year)=>{
+        marketSizeArray1.push(processObject[year][country1]);
+        marketSizeArray2.push(processObject[year][country2]);
+    })
 
 
+    // ['Quality', 'Competition', 'Protectionism', 'Market Size', 'Trade Dependency', 'Domestic Market Share']
+    var scoreArray1 = [];
+    var scoreArray2 = [];
+    hyScores.forEach((score)=>{
+        if(score.name===country1){
+            scoreArray1.push(score.recentExport);
+            scoreArray1.push(score.competition);
+            scoreArray1.push(score.protectionism);
+            scoreArray1.push(score.recentMarketsize);
+            scoreArray1.push(score.tradeDependency);
+            scoreArray1.push(score.domesticMarketShare);
+        }
+        if(score.name===country2){
+            scoreArray2.push(score.recentExport);
+            scoreArray2.push(score.competition);
+            scoreArray2.push(score.protectionism);
+            scoreArray2.push(score.recentMarketsize);
+            scoreArray2.push(score.tradeDependency);
+            scoreArray2.push(score.domesticMarketShare);
+        }
+    })
 
+    var partnerArray1 = [];
+    var partnerArray2 = [];
+    var proportionArray1 = [];
+    var proportaionArray2 = [];
+    var qualityArray1 = [];
+    var qualityArray2 = [];
+    hyPartner.forEach((partner)=>{
+        if(partner.buyer===country1){
+            partnerArray1.push(partner.seller);
+            proportionArray1.push(partner.proportion);
+        }
+        if(partner.buyer===country2){
+            partnerArray2.push(partner.seller);
+            proportionArray2.push(partner.proportion);
+        }
+    })
+    partnerArray1.forEach((partner)=>{
+        hyScores.forEach((score)=>{
+            if(score.name===partner){
+                qualityArray1.push(recentExport);
+            }
+        })
+    })
+    partnerArray2.forEach((partner)=>{
+        hyScores.forEach((score)=>{
+            if(score.name===partner){
+                qualityArray2.push(recentExport);
+            }
+        })
+    })
+
+    return [marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
+}
