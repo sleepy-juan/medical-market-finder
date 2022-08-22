@@ -14,6 +14,38 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		HyMarketsizeList: []types.HyMarketsize{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		HyPartnerList: []types.HyPartner{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		HyImportList: []types.HyImport{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		HyExportList: []types.HyExport{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +57,9 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.HyMarketsizeList, got.HyMarketsizeList)
+	require.ElementsMatch(t, genesisState.HyPartnerList, got.HyPartnerList)
+	require.ElementsMatch(t, genesisState.HyImportList, got.HyImportList)
+	require.ElementsMatch(t, genesisState.HyExportList, got.HyExportList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

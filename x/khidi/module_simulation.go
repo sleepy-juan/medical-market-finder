@@ -24,7 +24,23 @@ var (
 )
 
 const (
-// this line is used by starport scaffolding # simapp/module/const
+	opWeightMsgHyAddMarketsize = "op_weight_msg_hy_add_marketsize"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgHyAddMarketsize int = 100
+
+	opWeightMsgHyAddPartner = "op_weight_msg_hy_add_partner"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgHyAddPartner int = 100
+
+	opWeightMsgHyAddImport = "op_weight_msg_hy_add_import"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgHyAddImport int = 100
+
+	opWeightMsgHyAddExport = "op_weight_msg_hy_add_export"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgHyAddExport int = 100
+
+	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -57,6 +73,50 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
+
+	var weightMsgHyAddMarketsize int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgHyAddMarketsize, &weightMsgHyAddMarketsize, nil,
+		func(_ *rand.Rand) {
+			weightMsgHyAddMarketsize = defaultWeightMsgHyAddMarketsize
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgHyAddMarketsize,
+		khidisimulation.SimulateMsgHyAddMarketsize(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgHyAddPartner int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgHyAddPartner, &weightMsgHyAddPartner, nil,
+		func(_ *rand.Rand) {
+			weightMsgHyAddPartner = defaultWeightMsgHyAddPartner
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgHyAddPartner,
+		khidisimulation.SimulateMsgHyAddPartner(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgHyAddImport int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgHyAddImport, &weightMsgHyAddImport, nil,
+		func(_ *rand.Rand) {
+			weightMsgHyAddImport = defaultWeightMsgHyAddImport
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgHyAddImport,
+		khidisimulation.SimulateMsgHyAddImport(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgHyAddExport int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgHyAddExport, &weightMsgHyAddExport, nil,
+		func(_ *rand.Rand) {
+			weightMsgHyAddExport = defaultWeightMsgHyAddExport
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgHyAddExport,
+		khidisimulation.SimulateMsgHyAddExport(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

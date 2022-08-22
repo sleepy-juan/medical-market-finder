@@ -1,0 +1,14 @@
+syntax = "proto3";
+package khidi.khidi;
+
+option go_package = "khidi/x/khidi/types";
+
+message HyExport {
+  string index = 1; 
+  string name = 2; 
+  string year = 3; 
+  string group = 4; 
+  string volume = 5; 
+  
+}
+

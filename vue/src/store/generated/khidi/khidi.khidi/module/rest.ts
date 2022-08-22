@@ -9,10 +9,126 @@
  * ---------------------------------------------------------------
  */
 
+export interface KhidiHyExport {
+  index?: string;
+  name?: string;
+  year?: string;
+  group?: string;
+  volume?: string;
+}
+
+export interface KhidiHyImport {
+  index?: string;
+  name?: string;
+  year?: string;
+  group?: string;
+  volume?: string;
+}
+
+export interface KhidiHyMarketsize {
+  index?: string;
+  name?: string;
+  year?: string;
+  group?: string;
+  volume?: string;
+}
+
+export interface KhidiHyPartner {
+  index?: string;
+  buyer?: string;
+  seller?: string;
+  year?: string;
+  proportion?: string;
+}
+
+export type KhidiMsgHyAddExportResponse = object;
+
+export type KhidiMsgHyAddImportResponse = object;
+
+export type KhidiMsgHyAddMarketsizeResponse = object;
+
+export type KhidiMsgHyAddPartnerResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
 export type KhidiParams = object;
+
+export interface KhidiQueryAllHyExportResponse {
+  hyExport?: KhidiHyExport[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface KhidiQueryAllHyImportResponse {
+  hyImport?: KhidiHyImport[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface KhidiQueryAllHyMarketsizeResponse {
+  hyMarketsize?: KhidiHyMarketsize[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface KhidiQueryAllHyPartnerResponse {
+  hyPartner?: KhidiHyPartner[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface KhidiQueryGetHyExportResponse {
+  hyExport?: KhidiHyExport;
+}
+
+export interface KhidiQueryGetHyImportResponse {
+  hyImport?: KhidiHyImport;
+}
+
+export interface KhidiQueryGetHyMarketsizeResponse {
+  hyMarketsize?: KhidiHyMarketsize;
+}
+
+export interface KhidiQueryGetHyPartnerResponse {
+  hyPartner?: KhidiHyPartner;
+}
 
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -31,6 +147,69 @@ export interface RpcStatus {
   code?: number;
   message?: string;
   details?: ProtobufAny[];
+}
+
+/**
+* message SomeRequest {
+         Foo some_parameter = 1;
+         PageRequest pagination = 2;
+ }
+*/
+export interface V1Beta1PageRequest {
+  /**
+   * key is a value returned in PageResponse.next_key to begin
+   * querying the next page most efficiently. Only one of offset or key
+   * should be set.
+   * @format byte
+   */
+  key?: string;
+
+  /**
+   * offset is a numeric offset that can be used when key is unavailable.
+   * It is less efficient than using key. Only one of offset or key should
+   * be set.
+   * @format uint64
+   */
+  offset?: string;
+
+  /**
+   * limit is the total number of results to be returned in the result page.
+   * If left empty it will default to a value to be set by each app.
+   * @format uint64
+   */
+  limit?: string;
+
+  /**
+   * count_total is set to true  to indicate that the result set should include
+   * a count of the total number of items available for pagination in UIs.
+   * count_total is only respected when offset is used. It is ignored when key
+   * is set.
+   */
+  count_total?: boolean;
+
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
+  reverse?: boolean;
+}
+
+/**
+* PageResponse is to be embedded in gRPC response messages where the
+corresponding request message has used PageRequest.
+
+ message SomeResponse {
+         repeated Bar results = 1;
+         PageResponse page = 2;
+ }
+*/
+export interface V1Beta1PageResponse {
+  /** @format byte */
+  next_key?: string;
+
+  /** @format uint64 */
+  total?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -229,6 +408,174 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyExportAll
+   * @summary Queries a list of HyExport items.
+   * @request GET:/khidi/khidi/hy_export
+   */
+  queryHyExportAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<KhidiQueryAllHyExportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_export`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyExport
+   * @summary Queries a HyExport by index.
+   * @request GET:/khidi/khidi/hy_export/{index}
+   */
+  queryHyExport = (index: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryGetHyExportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_export/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyImportAll
+   * @summary Queries a list of HyImport items.
+   * @request GET:/khidi/khidi/hy_import
+   */
+  queryHyImportAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<KhidiQueryAllHyImportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_import`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyImport
+   * @summary Queries a HyImport by index.
+   * @request GET:/khidi/khidi/hy_import/{index}
+   */
+  queryHyImport = (index: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryGetHyImportResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_import/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyMarketsizeAll
+   * @summary Queries a list of HyMarketsize items.
+   * @request GET:/khidi/khidi/hy_marketsize
+   */
+  queryHyMarketsizeAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<KhidiQueryAllHyMarketsizeResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_marketsize`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyMarketsize
+   * @summary Queries a HyMarketsize by index.
+   * @request GET:/khidi/khidi/hy_marketsize/{index}
+   */
+  queryHyMarketsize = (index: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryGetHyMarketsizeResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_marketsize/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyPartnerAll
+   * @summary Queries a list of HyPartner items.
+   * @request GET:/khidi/khidi/hy_partner
+   */
+  queryHyPartnerAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<KhidiQueryAllHyPartnerResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_partner`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryHyPartner
+   * @summary Queries a HyPartner by index.
+   * @request GET:/khidi/khidi/hy_partner/{index}
+   */
+  queryHyPartner = (index: string, params: RequestParams = {}) =>
+    this.request<KhidiQueryGetHyPartnerResponse, RpcStatus>({
+      path: `/khidi/khidi/hy_partner/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

@@ -9,7 +9,11 @@ import (
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+	io "io"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -23,17 +27,493 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+type MsgHyAddMarketsize struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Year    string `protobuf:"bytes,3,opt,name=year,proto3" json:"year,omitempty"`
+	Group   string `protobuf:"bytes,4,opt,name=group,proto3" json:"group,omitempty"`
+	Volume  string `protobuf:"bytes,5,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *MsgHyAddMarketsize) Reset()         { *m = MsgHyAddMarketsize{} }
+func (m *MsgHyAddMarketsize) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddMarketsize) ProtoMessage()    {}
+func (*MsgHyAddMarketsize) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{0}
+}
+func (m *MsgHyAddMarketsize) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddMarketsize) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddMarketsize.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddMarketsize) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddMarketsize.Merge(m, src)
+}
+func (m *MsgHyAddMarketsize) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddMarketsize) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddMarketsize.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddMarketsize proto.InternalMessageInfo
+
+func (m *MsgHyAddMarketsize) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgHyAddMarketsize) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *MsgHyAddMarketsize) GetYear() string {
+	if m != nil {
+		return m.Year
+	}
+	return ""
+}
+
+func (m *MsgHyAddMarketsize) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+func (m *MsgHyAddMarketsize) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type MsgHyAddMarketsizeResponse struct {
+}
+
+func (m *MsgHyAddMarketsizeResponse) Reset()         { *m = MsgHyAddMarketsizeResponse{} }
+func (m *MsgHyAddMarketsizeResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddMarketsizeResponse) ProtoMessage()    {}
+func (*MsgHyAddMarketsizeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{1}
+}
+func (m *MsgHyAddMarketsizeResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddMarketsizeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddMarketsizeResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddMarketsizeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddMarketsizeResponse.Merge(m, src)
+}
+func (m *MsgHyAddMarketsizeResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddMarketsizeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddMarketsizeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddMarketsizeResponse proto.InternalMessageInfo
+
+type MsgHyAddPartner struct {
+	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Buyer      string `protobuf:"bytes,2,opt,name=buyer,proto3" json:"buyer,omitempty"`
+	Seller     string `protobuf:"bytes,3,opt,name=seller,proto3" json:"seller,omitempty"`
+	Year       string `protobuf:"bytes,4,opt,name=year,proto3" json:"year,omitempty"`
+	Proportion string `protobuf:"bytes,5,opt,name=proportion,proto3" json:"proportion,omitempty"`
+}
+
+func (m *MsgHyAddPartner) Reset()         { *m = MsgHyAddPartner{} }
+func (m *MsgHyAddPartner) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddPartner) ProtoMessage()    {}
+func (*MsgHyAddPartner) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{2}
+}
+func (m *MsgHyAddPartner) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddPartner) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddPartner.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddPartner) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddPartner.Merge(m, src)
+}
+func (m *MsgHyAddPartner) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddPartner) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddPartner.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddPartner proto.InternalMessageInfo
+
+func (m *MsgHyAddPartner) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgHyAddPartner) GetBuyer() string {
+	if m != nil {
+		return m.Buyer
+	}
+	return ""
+}
+
+func (m *MsgHyAddPartner) GetSeller() string {
+	if m != nil {
+		return m.Seller
+	}
+	return ""
+}
+
+func (m *MsgHyAddPartner) GetYear() string {
+	if m != nil {
+		return m.Year
+	}
+	return ""
+}
+
+func (m *MsgHyAddPartner) GetProportion() string {
+	if m != nil {
+		return m.Proportion
+	}
+	return ""
+}
+
+type MsgHyAddPartnerResponse struct {
+}
+
+func (m *MsgHyAddPartnerResponse) Reset()         { *m = MsgHyAddPartnerResponse{} }
+func (m *MsgHyAddPartnerResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddPartnerResponse) ProtoMessage()    {}
+func (*MsgHyAddPartnerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{3}
+}
+func (m *MsgHyAddPartnerResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddPartnerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddPartnerResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddPartnerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddPartnerResponse.Merge(m, src)
+}
+func (m *MsgHyAddPartnerResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddPartnerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddPartnerResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddPartnerResponse proto.InternalMessageInfo
+
+type MsgHyAddImport struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Year    string `protobuf:"bytes,3,opt,name=year,proto3" json:"year,omitempty"`
+	Group   string `protobuf:"bytes,4,opt,name=group,proto3" json:"group,omitempty"`
+	Volume  string `protobuf:"bytes,5,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *MsgHyAddImport) Reset()         { *m = MsgHyAddImport{} }
+func (m *MsgHyAddImport) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddImport) ProtoMessage()    {}
+func (*MsgHyAddImport) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{4}
+}
+func (m *MsgHyAddImport) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddImport) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddImport.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddImport) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddImport.Merge(m, src)
+}
+func (m *MsgHyAddImport) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddImport) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddImport.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddImport proto.InternalMessageInfo
+
+func (m *MsgHyAddImport) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgHyAddImport) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *MsgHyAddImport) GetYear() string {
+	if m != nil {
+		return m.Year
+	}
+	return ""
+}
+
+func (m *MsgHyAddImport) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+func (m *MsgHyAddImport) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type MsgHyAddImportResponse struct {
+}
+
+func (m *MsgHyAddImportResponse) Reset()         { *m = MsgHyAddImportResponse{} }
+func (m *MsgHyAddImportResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddImportResponse) ProtoMessage()    {}
+func (*MsgHyAddImportResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{5}
+}
+func (m *MsgHyAddImportResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddImportResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddImportResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddImportResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddImportResponse.Merge(m, src)
+}
+func (m *MsgHyAddImportResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddImportResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddImportResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddImportResponse proto.InternalMessageInfo
+
+type MsgHyAddExport struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Year    string `protobuf:"bytes,3,opt,name=year,proto3" json:"year,omitempty"`
+	Group   string `protobuf:"bytes,4,opt,name=group,proto3" json:"group,omitempty"`
+	Volume  string `protobuf:"bytes,5,opt,name=volume,proto3" json:"volume,omitempty"`
+}
+
+func (m *MsgHyAddExport) Reset()         { *m = MsgHyAddExport{} }
+func (m *MsgHyAddExport) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddExport) ProtoMessage()    {}
+func (*MsgHyAddExport) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{6}
+}
+func (m *MsgHyAddExport) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddExport) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddExport.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddExport) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddExport.Merge(m, src)
+}
+func (m *MsgHyAddExport) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddExport) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddExport.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddExport proto.InternalMessageInfo
+
+func (m *MsgHyAddExport) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgHyAddExport) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *MsgHyAddExport) GetYear() string {
+	if m != nil {
+		return m.Year
+	}
+	return ""
+}
+
+func (m *MsgHyAddExport) GetGroup() string {
+	if m != nil {
+		return m.Group
+	}
+	return ""
+}
+
+func (m *MsgHyAddExport) GetVolume() string {
+	if m != nil {
+		return m.Volume
+	}
+	return ""
+}
+
+type MsgHyAddExportResponse struct {
+}
+
+func (m *MsgHyAddExportResponse) Reset()         { *m = MsgHyAddExportResponse{} }
+func (m *MsgHyAddExportResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgHyAddExportResponse) ProtoMessage()    {}
+func (*MsgHyAddExportResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_b306304c74138ef3, []int{7}
+}
+func (m *MsgHyAddExportResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgHyAddExportResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgHyAddExportResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgHyAddExportResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgHyAddExportResponse.Merge(m, src)
+}
+func (m *MsgHyAddExportResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgHyAddExportResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgHyAddExportResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgHyAddExportResponse proto.InternalMessageInfo
+
+func init() {
+	proto.RegisterType((*MsgHyAddMarketsize)(nil), "khidi.khidi.MsgHyAddMarketsize")
+	proto.RegisterType((*MsgHyAddMarketsizeResponse)(nil), "khidi.khidi.MsgHyAddMarketsizeResponse")
+	proto.RegisterType((*MsgHyAddPartner)(nil), "khidi.khidi.MsgHyAddPartner")
+	proto.RegisterType((*MsgHyAddPartnerResponse)(nil), "khidi.khidi.MsgHyAddPartnerResponse")
+	proto.RegisterType((*MsgHyAddImport)(nil), "khidi.khidi.MsgHyAddImport")
+	proto.RegisterType((*MsgHyAddImportResponse)(nil), "khidi.khidi.MsgHyAddImportResponse")
+	proto.RegisterType((*MsgHyAddExport)(nil), "khidi.khidi.MsgHyAddExport")
+	proto.RegisterType((*MsgHyAddExportResponse)(nil), "khidi.khidi.MsgHyAddExportResponse")
+}
+
 func init() { proto.RegisterFile("khidi/tx.proto", fileDescriptor_b306304c74138ef3) }
 
 var fileDescriptor_b306304c74138ef3 = []byte{
-	// 98 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0xce, 0xc8, 0x4c,
-	0xc9, 0xd4, 0x2f, 0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x06, 0xf3, 0xf5, 0xc0,
-	0xa4, 0x11, 0x2b, 0x17, 0xb3, 0x6f, 0x71, 0xba, 0x93, 0xee, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e,
-	0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37,
-	0x1e, 0xcb, 0x31, 0x44, 0x09, 0x43, 0x74, 0x57, 0xe8, 0x43, 0x4d, 0xa9, 0x2c, 0x48, 0x2d, 0x4e,
-	0x62, 0x03, 0x9b, 0x64, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x3f, 0xfd, 0x83, 0x57, 0x5b, 0x00,
-	0x00, 0x00,
+	// 379 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x94, 0x4f, 0x4b, 0xc3, 0x30,
+	0x18, 0xc6, 0x97, 0xfd, 0x13, 0xdf, 0xc9, 0x06, 0x71, 0xcc, 0x5a, 0x47, 0x94, 0x2a, 0xe8, 0xc5,
+	0x0e, 0xf4, 0x13, 0x28, 0x08, 0x7a, 0x18, 0xca, 0x8e, 0x7a, 0xea, 0x5c, 0x98, 0x65, 0x5b, 0x53,
+	0x92, 0x4e, 0x56, 0x4f, 0x1e, 0xbc, 0x0a, 0x7e, 0x2c, 0x8f, 0x3b, 0xee, 0x28, 0xdb, 0x17, 0x91,
+	0x26, 0xe9, 0xe8, 0xb6, 0x3a, 0x6f, 0x7a, 0x29, 0x79, 0x9e, 0xa7, 0x79, 0xf3, 0x23, 0x79, 0x79,
+	0xa1, 0xdc, 0x7b, 0x72, 0x3b, 0x6e, 0x23, 0x18, 0xd9, 0x3e, 0x67, 0x01, 0xc3, 0x25, 0xa9, 0x6d,
+	0xf9, 0xb5, 0xde, 0x10, 0xe0, 0xa6, 0xe8, 0x5e, 0x87, 0x17, 0x9d, 0x4e, 0xd3, 0xe1, 0x3d, 0x1a,
+	0x08, 0xf7, 0x85, 0x62, 0x03, 0x36, 0x1e, 0x39, 0x75, 0x02, 0xc6, 0x0d, 0x74, 0x80, 0x4e, 0x36,
+	0x5b, 0xb1, 0xc4, 0x18, 0xf2, 0x9e, 0x33, 0xa0, 0x46, 0x56, 0xda, 0x72, 0x1d, 0x79, 0x21, 0x75,
+	0xb8, 0x91, 0x53, 0x5e, 0xb4, 0xc6, 0x55, 0x28, 0x74, 0x39, 0x1b, 0xfa, 0x46, 0x5e, 0x9a, 0x4a,
+	0xe0, 0x1a, 0x14, 0x9f, 0x59, 0x7f, 0x38, 0xa0, 0x46, 0x41, 0xda, 0x5a, 0x59, 0x75, 0x30, 0x57,
+	0x29, 0x5a, 0x54, 0xf8, 0xcc, 0x13, 0xd4, 0x7a, 0x47, 0x50, 0x89, 0xe3, 0x3b, 0x87, 0x07, 0x1e,
+	0xe5, 0x6b, 0x08, 0xab, 0x50, 0x68, 0x0f, 0x43, 0xca, 0x35, 0xa2, 0x12, 0xd1, 0xc9, 0x82, 0xf6,
+	0xfb, 0x34, 0xa6, 0xd4, 0x6a, 0xce, 0x9e, 0x4f, 0xb0, 0x13, 0x00, 0x9f, 0x33, 0x9f, 0xf1, 0xc0,
+	0x65, 0x9e, 0x26, 0x4d, 0x38, 0xd6, 0x2e, 0xec, 0x2c, 0xe1, 0xcc, 0x51, 0x5f, 0x11, 0x94, 0xe3,
+	0xec, 0x66, 0x10, 0x6d, 0xf8, 0xf3, 0xbb, 0x34, 0xa0, 0xb6, 0x48, 0x90, 0x0a, 0x77, 0x35, 0xfa,
+	0x6f, 0x38, 0x45, 0x10, 0xc3, 0x9d, 0x4d, 0xb2, 0x90, 0x6b, 0x8a, 0x2e, 0x7e, 0x80, 0xca, 0x72,
+	0x37, 0xee, 0xdb, 0x89, 0x96, 0xb5, 0x57, 0x1b, 0xc5, 0x3c, 0xfe, 0xe5, 0x87, 0xf8, 0x10, 0xdc,
+	0x82, 0xad, 0x85, 0x2e, 0xaa, 0xa7, 0x6e, 0xd4, 0xa9, 0x79, 0xb4, 0x2e, 0x9d, 0xd7, 0xbc, 0x85,
+	0x52, 0xf2, 0xb9, 0xf7, 0x52, 0x37, 0xa9, 0xd0, 0x3c, 0x5c, 0x13, 0xae, 0x14, 0xd4, 0x4f, 0x94,
+	0x5e, 0x50, 0x85, 0x3f, 0x14, 0x5c, 0xbc, 0xda, 0xcb, 0xd3, 0xcf, 0x29, 0x41, 0xe3, 0x29, 0x41,
+	0x5f, 0x53, 0x82, 0x3e, 0x66, 0x24, 0x33, 0x9e, 0x91, 0xcc, 0x64, 0x46, 0x32, 0xf7, 0xdb, 0x6a,
+	0x36, 0x8c, 0x1a, 0x7a, 0x46, 0x84, 0x3e, 0x15, 0xed, 0xa2, 0x9c, 0x13, 0xe7, 0xdf, 0x01, 0x00,
+	0x00, 0xff, 0xff, 0x45, 0x66, 0x47, 0xbf, 0x39, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -48,6 +528,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
+	HyAddMarketsize(ctx context.Context, in *MsgHyAddMarketsize, opts ...grpc.CallOption) (*MsgHyAddMarketsizeResponse, error)
+	HyAddPartner(ctx context.Context, in *MsgHyAddPartner, opts ...grpc.CallOption) (*MsgHyAddPartnerResponse, error)
+	HyAddImport(ctx context.Context, in *MsgHyAddImport, opts ...grpc.CallOption) (*MsgHyAddImportResponse, error)
+	HyAddExport(ctx context.Context, in *MsgHyAddExport, opts ...grpc.CallOption) (*MsgHyAddExportResponse, error)
 }
 
 type msgClient struct {
@@ -58,22 +542,1782 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
+func (c *msgClient) HyAddMarketsize(ctx context.Context, in *MsgHyAddMarketsize, opts ...grpc.CallOption) (*MsgHyAddMarketsizeResponse, error) {
+	out := new(MsgHyAddMarketsizeResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Msg/HyAddMarketsize", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) HyAddPartner(ctx context.Context, in *MsgHyAddPartner, opts ...grpc.CallOption) (*MsgHyAddPartnerResponse, error) {
+	out := new(MsgHyAddPartnerResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Msg/HyAddPartner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) HyAddImport(ctx context.Context, in *MsgHyAddImport, opts ...grpc.CallOption) (*MsgHyAddImportResponse, error) {
+	out := new(MsgHyAddImportResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Msg/HyAddImport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) HyAddExport(ctx context.Context, in *MsgHyAddExport, opts ...grpc.CallOption) (*MsgHyAddExportResponse, error) {
+	out := new(MsgHyAddExportResponse)
+	err := c.cc.Invoke(ctx, "/khidi.khidi.Msg/HyAddExport", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
+	HyAddMarketsize(context.Context, *MsgHyAddMarketsize) (*MsgHyAddMarketsizeResponse, error)
+	HyAddPartner(context.Context, *MsgHyAddPartner) (*MsgHyAddPartnerResponse, error)
+	HyAddImport(context.Context, *MsgHyAddImport) (*MsgHyAddImportResponse, error)
+	HyAddExport(context.Context, *MsgHyAddExport) (*MsgHyAddExportResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
+func (*UnimplementedMsgServer) HyAddMarketsize(ctx context.Context, req *MsgHyAddMarketsize) (*MsgHyAddMarketsizeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyAddMarketsize not implemented")
+}
+func (*UnimplementedMsgServer) HyAddPartner(ctx context.Context, req *MsgHyAddPartner) (*MsgHyAddPartnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyAddPartner not implemented")
+}
+func (*UnimplementedMsgServer) HyAddImport(ctx context.Context, req *MsgHyAddImport) (*MsgHyAddImportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyAddImport not implemented")
+}
+func (*UnimplementedMsgServer) HyAddExport(ctx context.Context, req *MsgHyAddExport) (*MsgHyAddExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HyAddExport not implemented")
+}
+
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
+}
+
+func _Msg_HyAddMarketsize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgHyAddMarketsize)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).HyAddMarketsize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Msg/HyAddMarketsize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).HyAddMarketsize(ctx, req.(*MsgHyAddMarketsize))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_HyAddPartner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgHyAddPartner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).HyAddPartner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Msg/HyAddPartner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).HyAddPartner(ctx, req.(*MsgHyAddPartner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_HyAddImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgHyAddImport)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).HyAddImport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Msg/HyAddImport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).HyAddImport(ctx, req.(*MsgHyAddImport))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_HyAddExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgHyAddExport)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).HyAddExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/khidi.khidi.Msg/HyAddExport",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).HyAddExport(ctx, req.(*MsgHyAddExport))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "khidi.khidi.Msg",
 	HandlerType: (*MsgServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "khidi/tx.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HyAddMarketsize",
+			Handler:    _Msg_HyAddMarketsize_Handler,
+		},
+		{
+			MethodName: "HyAddPartner",
+			Handler:    _Msg_HyAddPartner_Handler,
+		},
+		{
+			MethodName: "HyAddImport",
+			Handler:    _Msg_HyAddImport_Handler,
+		},
+		{
+			MethodName: "HyAddExport",
+			Handler:    _Msg_HyAddExport_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "khidi/tx.proto",
 }
+
+func (m *MsgHyAddMarketsize) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddMarketsize) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddMarketsize) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Year) > 0 {
+		i -= len(m.Year)
+		copy(dAtA[i:], m.Year)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Year)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddMarketsizeResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddMarketsizeResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddMarketsizeResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddPartner) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddPartner) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddPartner) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Proportion) > 0 {
+		i -= len(m.Proportion)
+		copy(dAtA[i:], m.Proportion)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Proportion)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Year) > 0 {
+		i -= len(m.Year)
+		copy(dAtA[i:], m.Year)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Year)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Seller) > 0 {
+		i -= len(m.Seller)
+		copy(dAtA[i:], m.Seller)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Seller)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Buyer) > 0 {
+		i -= len(m.Buyer)
+		copy(dAtA[i:], m.Buyer)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Buyer)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddPartnerResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddPartnerResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddPartnerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddImport) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddImport) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddImport) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Year) > 0 {
+		i -= len(m.Year)
+		copy(dAtA[i:], m.Year)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Year)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddImportResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddImportResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddImportResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddExport) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddExport) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddExport) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Volume) > 0 {
+		i -= len(m.Volume)
+		copy(dAtA[i:], m.Volume)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Volume)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Group) > 0 {
+		i -= len(m.Group)
+		copy(dAtA[i:], m.Group)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Group)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Year) > 0 {
+		i -= len(m.Year)
+		copy(dAtA[i:], m.Year)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Year)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgHyAddExportResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgHyAddExportResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgHyAddExportResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
+	offset -= sovTx(v)
+	base := offset
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return base
+}
+func (m *MsgHyAddMarketsize) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Year)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgHyAddMarketsizeResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgHyAddPartner) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Buyer)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Seller)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Year)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Proportion)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgHyAddPartnerResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgHyAddImport) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Year)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgHyAddImportResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgHyAddExport) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Year)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Group)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Volume)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgHyAddExportResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func sovTx(x uint64) (n int) {
+	return (math_bits.Len64(x|1) + 6) / 7
+}
+func sozTx(x uint64) (n int) {
+	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *MsgHyAddMarketsize) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddMarketsize: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddMarketsize: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Year", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Year = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddMarketsizeResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddMarketsizeResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddMarketsizeResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddPartner) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddPartner: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddPartner: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Buyer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Buyer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Seller", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Seller = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Year", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Year = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Proportion", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Proportion = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddPartnerResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddPartnerResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddPartnerResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddImport) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddImport: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddImport: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Year", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Year = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddImportResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddImportResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddImportResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddExport) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddExport: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddExport: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Year", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Year = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Group", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Group = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Volume", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Volume = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgHyAddExportResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgHyAddExportResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgHyAddExportResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func skipTx(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
+	iNdEx := 0
+	depth := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				iNdEx++
+				if dAtA[iNdEx-1] < 0x80 {
+					break
+				}
+			}
+		case 1:
+			iNdEx += 8
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if length < 0 {
+				return 0, ErrInvalidLengthTx
+			}
+			iNdEx += length
+		case 3:
+			depth++
+		case 4:
+			if depth == 0 {
+				return 0, ErrUnexpectedEndOfGroupTx
+			}
+			depth--
+		case 5:
+			iNdEx += 4
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+		if iNdEx < 0 {
+			return 0, ErrInvalidLengthTx
+		}
+		if depth == 0 {
+			return iNdEx, nil
+		}
+	}
+	return 0, io.ErrUnexpectedEOF
+}
+
+var (
+	ErrInvalidLengthTx        = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowTx          = fmt.Errorf("proto: integer overflow")
+	ErrUnexpectedEndOfGroupTx = fmt.Errorf("proto: unexpected end of group")
+)

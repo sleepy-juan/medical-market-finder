@@ -4,9 +4,17 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgHyAddImport } from "./types/khidi/tx";
+import { MsgHyAddPartner } from "./types/khidi/tx";
+import { MsgHyAddExport } from "./types/khidi/tx";
+import { MsgHyAddMarketsize } from "./types/khidi/tx";
 
 
 const types = [
+  ["/khidi.khidi.MsgHyAddImport", MsgHyAddImport],
+  ["/khidi.khidi.MsgHyAddPartner", MsgHyAddPartner],
+  ["/khidi.khidi.MsgHyAddExport", MsgHyAddExport],
+  ["/khidi.khidi.MsgHyAddMarketsize", MsgHyAddMarketsize],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,6 +47,10 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgHyAddImport: (data: MsgHyAddImport): EncodeObject => ({ typeUrl: "/khidi.khidi.MsgHyAddImport", value: MsgHyAddImport.fromPartial( data ) }),
+    msgHyAddPartner: (data: MsgHyAddPartner): EncodeObject => ({ typeUrl: "/khidi.khidi.MsgHyAddPartner", value: MsgHyAddPartner.fromPartial( data ) }),
+    msgHyAddExport: (data: MsgHyAddExport): EncodeObject => ({ typeUrl: "/khidi.khidi.MsgHyAddExport", value: MsgHyAddExport.fromPartial( data ) }),
+    msgHyAddMarketsize: (data: MsgHyAddMarketsize): EncodeObject => ({ typeUrl: "/khidi.khidi.MsgHyAddMarketsize", value: MsgHyAddMarketsize.fromPartial( data ) }),
     
   };
 };

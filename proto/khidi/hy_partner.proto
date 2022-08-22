@@ -1,0 +1,14 @@
+syntax = "proto3";
+package khidi.khidi;
+
+option go_package = "khidi/x/khidi/types";
+
+message HyPartner {
+  string index = 1; 
+  string buyer = 2; 
+  string seller = 3; 
+  string year = 4; 
+  string proportion = 5; 
+  
+}
+

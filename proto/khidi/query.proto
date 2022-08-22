@@ -5,6 +5,10 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "khidi/params.proto";
+import "khidi/hy_marketsize.proto";
+import "khidi/hy_partner.proto";
+import "khidi/hy_import.proto";
+import "khidi/hy_export.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "khidi/x/khidi/types";
@@ -15,7 +19,47 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/khidi/khidi/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a HyMarketsize by index.
+	rpc HyMarketsize(QueryGetHyMarketsizeRequest) returns (QueryGetHyMarketsizeResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_marketsize/{index}";
+	}
+
+	// Queries a list of HyMarketsize items.
+	rpc HyMarketsizeAll(QueryAllHyMarketsizeRequest) returns (QueryAllHyMarketsizeResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_marketsize";
+	}
+
+// Queries a HyPartner by index.
+	rpc HyPartner(QueryGetHyPartnerRequest) returns (QueryGetHyPartnerResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_partner/{index}";
+	}
+
+	// Queries a list of HyPartner items.
+	rpc HyPartnerAll(QueryAllHyPartnerRequest) returns (QueryAllHyPartnerResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_partner";
+	}
+
+// Queries a HyImport by index.
+	rpc HyImport(QueryGetHyImportRequest) returns (QueryGetHyImportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_import/{index}";
+	}
+
+	// Queries a list of HyImport items.
+	rpc HyImportAll(QueryAllHyImportRequest) returns (QueryAllHyImportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_import";
+	}
+
+// Queries a HyExport by index.
+	rpc HyExport(QueryGetHyExportRequest) returns (QueryGetHyExportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_export/{index}";
+	}
+
+	// Queries a list of HyExport items.
+	rpc HyExportAll(QueryAllHyExportRequest) returns (QueryAllHyExportResponse) {
+		option (google.api.http).get = "/khidi/khidi/hy_export";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +69,78 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetHyMarketsizeRequest {
+	  string index = 1;
+
+}
+
+message QueryGetHyMarketsizeResponse {
+	HyMarketsize hyMarketsize = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHyMarketsizeRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHyMarketsizeResponse {
+	repeated HyMarketsize hyMarketsize = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetHyPartnerRequest {
+	  string index = 1;
+
+}
+
+message QueryGetHyPartnerResponse {
+	HyPartner hyPartner = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHyPartnerRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHyPartnerResponse {
+	repeated HyPartner hyPartner = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetHyImportRequest {
+	  string index = 1;
+
+}
+
+message QueryGetHyImportResponse {
+	HyImport hyImport = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHyImportRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHyImportResponse {
+	repeated HyImport hyImport = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetHyExportRequest {
+	  string index = 1;
+
+}
+
+message QueryGetHyExportResponse {
+	HyExport hyExport = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHyExportRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHyExportResponse {
+	repeated HyExport hyExport = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

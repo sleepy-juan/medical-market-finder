@@ -29809,6 +29809,714 @@ paths:
           format: uint64
       tags:
         - Query
+  /khidi/khidi/hy_export:
+    get:
+      summary: Queries a list of HyExport items.
+      operationId: KhidiKhidiHyExportAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyExport:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    name:
+                      type: string
+                    year:
+                      type: string
+                    group:
+                      type: string
+                    volume:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/khidi/khidi/hy_export/{index}':
+    get:
+      summary: Queries a HyExport by index.
+      operationId: KhidiKhidiHyExport
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyExport:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  name:
+                    type: string
+                  year:
+                    type: string
+                  group:
+                    type: string
+                  volume:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /khidi/khidi/hy_import:
+    get:
+      summary: Queries a list of HyImport items.
+      operationId: KhidiKhidiHyImportAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyImport:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    name:
+                      type: string
+                    year:
+                      type: string
+                    group:
+                      type: string
+                    volume:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/khidi/khidi/hy_import/{index}':
+    get:
+      summary: Queries a HyImport by index.
+      operationId: KhidiKhidiHyImport
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyImport:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  name:
+                    type: string
+                  year:
+                    type: string
+                  group:
+                    type: string
+                  volume:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /khidi/khidi/hy_marketsize:
+    get:
+      summary: Queries a list of HyMarketsize items.
+      operationId: KhidiKhidiHyMarketsizeAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyMarketsize:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    name:
+                      type: string
+                    year:
+                      type: string
+                    group:
+                      type: string
+                    volume:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/khidi/khidi/hy_marketsize/{index}':
+    get:
+      summary: Queries a HyMarketsize by index.
+      operationId: KhidiKhidiHyMarketsize
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyMarketsize:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  name:
+                    type: string
+                  year:
+                    type: string
+                  group:
+                    type: string
+                  volume:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /khidi/khidi/hy_partner:
+    get:
+      summary: Queries a list of HyPartner items.
+      operationId: KhidiKhidiHyPartnerAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyPartner:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    buyer:
+                      type: string
+                    seller:
+                      type: string
+                    year:
+                      type: string
+                    proportion:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/khidi/khidi/hy_partner/{index}':
+    get:
+      summary: Queries a HyPartner by index.
+      operationId: KhidiKhidiHyPartner
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              hyPartner:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  buyer:
+                    type: string
+                  seller:
+                    type: string
+                  year:
+                    type: string
+                  proportion:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /khidi/khidi/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -51552,9 +52260,305 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  khidi.khidi.HyExport:
+    type: object
+    properties:
+      index:
+        type: string
+      name:
+        type: string
+      year:
+        type: string
+      group:
+        type: string
+      volume:
+        type: string
+  khidi.khidi.HyImport:
+    type: object
+    properties:
+      index:
+        type: string
+      name:
+        type: string
+      year:
+        type: string
+      group:
+        type: string
+      volume:
+        type: string
+  khidi.khidi.HyMarketsize:
+    type: object
+    properties:
+      index:
+        type: string
+      name:
+        type: string
+      year:
+        type: string
+      group:
+        type: string
+      volume:
+        type: string
+  khidi.khidi.HyPartner:
+    type: object
+    properties:
+      index:
+        type: string
+      buyer:
+        type: string
+      seller:
+        type: string
+      year:
+        type: string
+      proportion:
+        type: string
+  khidi.khidi.MsgHyAddExportResponse:
+    type: object
+  khidi.khidi.MsgHyAddImportResponse:
+    type: object
+  khidi.khidi.MsgHyAddMarketsizeResponse:
+    type: object
+  khidi.khidi.MsgHyAddPartnerResponse:
+    type: object
   khidi.khidi.Params:
     type: object
     description: Params defines the parameters for the module.
+  khidi.khidi.QueryAllHyExportResponse:
+    type: object
+    properties:
+      hyExport:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            name:
+              type: string
+            year:
+              type: string
+            group:
+              type: string
+            volume:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  khidi.khidi.QueryAllHyImportResponse:
+    type: object
+    properties:
+      hyImport:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            name:
+              type: string
+            year:
+              type: string
+            group:
+              type: string
+            volume:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  khidi.khidi.QueryAllHyMarketsizeResponse:
+    type: object
+    properties:
+      hyMarketsize:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            name:
+              type: string
+            year:
+              type: string
+            group:
+              type: string
+            volume:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  khidi.khidi.QueryAllHyPartnerResponse:
+    type: object
+    properties:
+      hyPartner:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            buyer:
+              type: string
+            seller:
+              type: string
+            year:
+              type: string
+            proportion:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  khidi.khidi.QueryGetHyExportResponse:
+    type: object
+    properties:
+      hyExport:
+        type: object
+        properties:
+          index:
+            type: string
+          name:
+            type: string
+          year:
+            type: string
+          group:
+            type: string
+          volume:
+            type: string
+  khidi.khidi.QueryGetHyImportResponse:
+    type: object
+    properties:
+      hyImport:
+        type: object
+        properties:
+          index:
+            type: string
+          name:
+            type: string
+          year:
+            type: string
+          group:
+            type: string
+          volume:
+            type: string
+  khidi.khidi.QueryGetHyMarketsizeResponse:
+    type: object
+    properties:
+      hyMarketsize:
+        type: object
+        properties:
+          index:
+            type: string
+          name:
+            type: string
+          year:
+            type: string
+          group:
+            type: string
+          volume:
+            type: string
+  khidi.khidi.QueryGetHyPartnerResponse:
+    type: object
+    properties:
+      hyPartner:
+        type: object
+        properties:
+          index:
+            type: string
+          buyer:
+            type: string
+          seller:
+            type: string
+          year:
+            type: string
+          proportion:
+            type: string
   khidi.khidi.QueryParamsResponse:
     type: object
     properties:

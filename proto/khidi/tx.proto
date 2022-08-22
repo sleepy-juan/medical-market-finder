@@ -7,7 +7,55 @@ option go_package = "khidi/x/khidi/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc HyAddMarketsize(MsgHyAddMarketsize) returns (MsgHyAddMarketsizeResponse);
+  rpc HyAddPartner(MsgHyAddPartner) returns (MsgHyAddPartnerResponse);
+  rpc HyAddImport(MsgHyAddImport) returns (MsgHyAddImportResponse);
+  rpc HyAddExport(MsgHyAddExport) returns (MsgHyAddExportResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgHyAddMarketsize {
+  string creator = 1;
+  string name = 2;
+  string year = 3;
+  string group = 4;
+  string volume = 5;
+}
+
+message MsgHyAddMarketsizeResponse {
+}
+
+message MsgHyAddPartner {
+  string creator = 1;
+  string buyer = 2;
+  string seller = 3;
+  string year = 4;
+  string proportion = 5;
+}
+
+message MsgHyAddPartnerResponse {
+}
+
+message MsgHyAddImport {
+  string creator = 1;
+  string name = 2;
+  string year = 3;
+  string group = 4;
+  string volume = 5;
+}
+
+message MsgHyAddImportResponse {
+}
+
+message MsgHyAddExport {
+  string creator = 1;
+  string name = 2;
+  string year = 3;
+  string group = 4;
+  string volume = 5;
+}
+
+message MsgHyAddExportResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

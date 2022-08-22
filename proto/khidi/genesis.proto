@@ -3,6 +3,10 @@ package khidi.khidi;
 
 import "gogoproto/gogo.proto";
 import "khidi/params.proto";
+import "khidi/hy_marketsize.proto";
+import "khidi/hy_partner.proto";
+import "khidi/hy_import.proto";
+import "khidi/hy_export.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "khidi/x/khidi/types";
@@ -10,5 +14,9 @@ option go_package = "khidi/x/khidi/types";
 // GenesisState defines the khidi module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated HyMarketsize hyMarketsizeList = 2 [(gogoproto.nullable) = false];
+  repeated HyPartner hyPartnerList = 3 [(gogoproto.nullable) = false];
+  repeated HyImport hyImportList = 4 [(gogoproto.nullable) = false];
+  repeated HyExport hyExportList = 5 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
