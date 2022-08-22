@@ -31,7 +31,8 @@
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <link rel="icon" type="image/png" href="../../dist/images/favicon.png"> -->
-
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link href="index.css" rel="stylesheet" />
 </head>
 <i class="fa fa-brands fa-hive"></i>
 <body>
@@ -56,21 +57,54 @@
     <div id="selectCountry" class="container">
         <div class="row">
             <h4 class="hero-heading">어떤 나라의 시장을 비교할까요?</h4>
-            <a class="button button-primary">러시아</a>
-            <a class="button button-primary">벨기에</a>
-            <a class="button button-primary">영국</a>
-            <a class="button button-primary">더미니까누르지마</a>
-            <a class="button button-primary">더미니까누르지마</a>
-        </div>
-        <div class="row">
-            <a href="result.html" class="button" id="submit">분석 시작</a>
+            <div class="three columns">
+              <div class="picker">
+                <div id="picker"></div>
+                <div class="output"></div>
+                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <script type="text/javascript" src="jquery.ios.picker.js"></script>
+            
+                <script>
+                    $(document).ready(function () {
+                        $("#picker").picker({
+                            data: ['벨기에', '러시아', '영국', '미국', '독일', '프랑스', '베트남'],
+                            lineHeight: 30,
+                            selected: 0
+                        }, function (s) {
+                            $(".output").html(s);
+                            $(".picker").data("value", s);
+                        });
+                    });
+                </script>
+              </div>
+            </div>
+
+            <div class="three columns">
+              <div class="picker2">
+                <div id="picker2"></div>
+                <div class="output2"></div>
+                <script>
+                    $(document).ready(function () {
+                        $("#picker2").picker2({
+                            data: ['벨기에', '러시아', '영국', '미국', '독일', '프랑스', '베트남'],
+                            lineHeight: 30,
+                            selected: 0
+                        }, function (s) {
+                            $(".output2").html(s);
+                            $(".picker2").data("value", s);
+                        });
+                    });
+                </script>
+              </div>
+            </div>
+
+            <div class="four columns">
+              <a href="result.html" class="button" id="submit">분석 시작</a>
+            </div>
+
+
         </div>
     </div>
-  </div>
-  
-  <div class="section hero">
- 
-
   </div>
 
 <!-- End Document

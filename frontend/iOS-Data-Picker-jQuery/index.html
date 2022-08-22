@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>jQuery ios.picker.js Plugin Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="index.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div id="day-picker"></div>
+    <div class="output"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery.ios.picker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#day-picker").picker({
+                data: ['jQuery', 'Script', 'Net', 'AngularJS', 'ReactJS', 'VueJS', 'React Native'],
+                lineHeight: 30,
+                selected: 0
+            }, function (s) {
+                $(".output").html(s);
+                $(".day-picker").data("value", s);
+            });
+        });
+    </script>
+</body>
+</html>
