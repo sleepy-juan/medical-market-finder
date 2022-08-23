@@ -1,4 +1,4 @@
-let apiKey = "AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8";
+let apiKey = "AIzaSyBnqaL2b7aNluotZ7uSMwG1TdZH_tkzAHI";
 
 let urlMarketsize = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/marketsize?key=${apiKey}`;
 let urlExport = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/export?key=${apiKey}`;

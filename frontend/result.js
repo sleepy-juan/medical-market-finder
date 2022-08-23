@@ -131,8 +131,11 @@ function makeRadar(country1, country2, scoreArray1, scoreArray2) {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true,
+                    beginAtZero: false,
                 },
+                r: {
+                    suggestedMin:0
+                }
             },
         },
     });
@@ -142,6 +145,11 @@ function render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyP
     console.log(hyExport, hyMarketSize, hyImport, hyScores, hyPartner);
     allData = preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores);
     //[marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
+    var overAll1 = allData[3].reduce((a,b)=>a+b,0)/6;
+    var overAll2 = allData[4].reduce((a,b)=>a+b,0)/6;
+
+    
+
     makeLines(country1, country2, allData[0], allData[1], allData[2]);
     makePies(country1, "pie1", allData[5], allData[9], allData[7]);
     makePies(country2, "pie2", allData[6], allData[10], allData[8]);
@@ -211,21 +219,23 @@ function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport,
     hyScores.forEach((score) => {
         if (score.name === country1) {
             scoreArray1.push(normalizeQuality(score.recentExport, hyScores));
-            scoreArray1.push(100 - normalizeQuality(score.competition, hyScores));
-            scoreArray1.push(100 - normalizeProtectionism(score.protectionism, hyScores));
-            scoreArray1.push(normalizeQuality(score.recentMarketsize, hyScores));
-            scoreArray1.push(normalizeQuality(score.tradeDependency, hyScores));
-            scoreArray1.push(100 - normalizeProtectionism(score.domesticMarketShare, hyScores));
+            scoreArray1.push(normalizeCompetition(score.competition, hyScores));
+            scoreArray1.push(normalizeProtectionism(score.protectionism, hyScores));
+            scoreArray1.push(normalizeMarketSize(score.recentMarketsize, hyScores));
+            scoreArray1.push(normalizeTrade(score.tradeDependency, hyScores));
+            scoreArray1.push(normalizeMarketShare(score.domesticMarketShare, hyScores));
         }
         if (score.name === country2) {
             scoreArray2.push(normalizeQuality(score.recentExport, hyScores));
-            scoreArray2.push(100 - normalizeQuality(score.competition, hyScores));
-            scoreArray2.push(100 - normalizeProtectionism(score.protectionism, hyScores));
-            scoreArray2.push(normalizeQuality(score.recentMarketsize, hyScores));
-            scoreArray2.push(normalizeQuality(score.tradeDependency, hyScores));
-            scoreArray2.push(100 - normalizeProtectionism(score.domesticMarketShare, hyScores));
+            scoreArray2.push(normalizeCompetition(score.competition, hyScores));
+            scoreArray2.push(normalizeProtectionism(score.protectionism, hyScores));
+            scoreArray2.push(normalizeMarketSize(score.recentMarketsize, hyScores));
+            scoreArray2.push(normalizeTrade(score.tradeDependency, hyScores));
+            scoreArray2.push(normalizeMarketShare(score.domesticMarketShare, hyScores));
         }
     });
+
+
 
     var partnerArray1 = [];
     var partnerArray2 = [];
@@ -280,23 +290,23 @@ function makeReport(country1, country2, hyScores) {
     let report2 = {};
     hyScores.forEach((score) => {
         if (score.name === country1) {
-            competition1 = score.competition;
-            protectionism1 = score.protectionism;
-            import1 = score.recentImport;
-            export1 = score.recentExport;
+            competition1 = score.competition*1;
+            protectionism1 = score.protectionism*1;
+            import1 = score.recentImport*1;
+            export1 = score.recentExport*1;
         }
         if (score.name === country2) {
-            competition2 = score.competition;
-            protectionism2 = score.protectionism;
-            import2 = score.recentImport;
-            export2 = score.recentExport;
+            competition2 = score.competition*1;
+            protectionism2 = score.protectionism*1;
+            import2 = score.recentImport*1;
+            export2 = score.recentExport*1;
         }
     });
 
     if (competition1 > competition2) {
-        report2["낮은 경쟁"] = country1 + "(이)가 수입하는 국가들의 생산품질은" + country2 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
+        report2["낮은 경쟁"] = country2 + "(이)가 수입하는 국가들의 생산품질은 " + country1 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
     } else {
-        report1["낮은 경쟁"] = country2 + "(이)가 수입하는 국가들의 생산품질은" + country1 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
+        report1["낮은 경쟁"] = country1 + "(이)가 수입하는 국가들의 생산품질은 " + country2 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
     }
 
     if (protectionism1 > protectionism2) {
@@ -319,22 +329,58 @@ function makeReport(country1, country2, hyScores) {
     return [report1, report2];
 }
 
+function normalizeTrade(trade,hyScore){
+    let max_score = 0;
+    hyScores.forEach((score) => {
+        if (score.tradeDependency * 1 > max_score) max_score = score.tradeDependency * 1;
+    });
+    return (trade * 50) / max_score+50;
+}
+
+function normalizeMarketSize(size,hyScore){
+    let max_score = 0;
+    hyScores.forEach((score) => {
+        if (score.recentMarketsize * 1 > max_score) max_score = score.recentMarketsize * 1;
+    });
+    return Math.pow((size) / max_score,0.5) *50+50;
+}
+
 function normalizeQuality(quality, hyScores) {
     let max_score = 0;
     hyScores.forEach((score) => {
         if (score.quality * 1 > max_score) max_score = score.quality * 1;
     });
-    return (quality * 100) / max_score;
+    return Math.pow((quality) / max_score,0.5)*50+50;
+}
+
+function normalizeCompetition(competition, hyScores) {
+    let max_score = 0;
+    hyScores.forEach((score) => {
+        if (score.competition* 1 > max_score) max_score = score.competition * 1;
+    });
+    console.log(competition);
+    console.log((competition * 50) / max_score+50)
+    return 100-(competition * 50) / max_score;
 }
 
 function normalizeProtectionism(protectionism, hyScores) {
     let minScore = 0;
     let maxScore = 0;
     hyScores.forEach((score) => {
-        if (score.protectionism * 1 < minScore) minScore = score.protectionism;
-        if (score.protectionism * 1 > maxScore) maxScore = score.protectionism;
+        if (score.protectionism * 1 < minScore) minScore = score.protectionism*1;
+        if (score.protectionism * 1 > maxScore) maxScore = score.protectionism*1;
     });
-    return ((protectionism - minScore) / (maxScore - minScore)) * 100;
+    return 100-Math.pow((protectionism - minScore)/ (maxScore - minScore),5)*50;
+}
+
+function normalizeMarketShare(MarketShare, hyScores) {
+    let minScore = 0;
+    let maxScore = 0;
+    hyScores.forEach((score) => {
+        if (score.domesticMarketShare * 1 < minScore) minScore = score.domesticMarketShare*1;
+        if (score.domesticMarketShare * 1 > maxScore) maxScore = score.domesticMarketShare*1;
+    });
+    return 100-((MarketShare - minScore)*50 / (maxScore - minScore));
 }
 
 window.onload = () => {
