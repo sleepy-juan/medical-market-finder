@@ -176,10 +176,10 @@ function makeRadar(country1, country2,scoreArray1,scoreArray2){
 function render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores){
     allData = preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores);
     //[marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
-    makeLines(country1,country2,marketSizeArray1,marketSizeArray2,yearArray);
-    makePies(country1,"pie1",partnerArray1,qualityArray1,proportionArray1);
-    makePies(country2,"pie2",partnerArray2,qualityArray2,proportionArray2);
-    makeRadar(countr1,countr2,scoreArray1,scoreArray2);
+    makeLines(country1,country2,allData[0],allData[1],allData[2]);
+    makePies(country1,"pie1",allData[5],allData[9],allData[7]);
+    makePies(country2,"pie2",allData[6],allData[10],allData[8]);
+    makeRadar(country1,country2,allData[3],allData[4]);
 }
 
 function preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores){
@@ -240,7 +240,7 @@ function preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPar
     var partnerArray1 = [];
     var partnerArray2 = [];
     var proportionArray1 = [];
-    var proportaionArray2 = [];
+    var proportionArray2 = [];
     var qualityArray1 = [];
     var qualityArray2 = [];
     hyPartner.forEach((partner)=>{
@@ -256,17 +256,50 @@ function preprocess(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPar
     partnerArray1.forEach((partner)=>{
         hyScores.forEach((score)=>{
             if(score.name===partner){
-                qualityArray1.push(recentExport);
+                qualityArray1.push(score.recentExport);
             }
         })
     })
     partnerArray2.forEach((partner)=>{
         hyScores.forEach((score)=>{
             if(score.name===partner){
-                qualityArray2.push(recentExport);
+                qualityArray2.push(score.recentExport);
             }
         })
     })
 
-    return [marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
+    return [marketSizeArray1,marketSizeArray2,marketSizeYears,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
+}
+
+window.onload = () => {
+    let country1 = "러시아";
+    let country2 = "벨기에";
+    let group = "의료소모품";
+    
+    fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
+    .then(response => response.json())
+    .then(json => json["hyExport"])
+    .then(hyExport => {
+        fetch("http://0.0.0.0:1317/khidi/khidi/hy_marketsize")
+        .then(response => response.json())
+        .then(json => json["hyMarketsize"])
+        .then(hyMarketSize => {
+            fetch("http://0.0.0.0:1317/khidi/khidi/hy_import")
+            .then(response => response.json())
+            .then(json => json["hyImport"])
+            .then(hyImport => {
+                fetch("http://0.0.0.0:1317/khidi/khidi/hy_partner")
+                .then(response => response.json())
+                .then(json => json["hyPartner"])
+                .then(hyPartner => {
+                    fetch(`http://0.0.0.0:1317/khidi/khidi/hy_all_names_of/${group}`)
+                    .then(response => response.json())
+                    .then(json => json["HyAllNamesOf"])
+                    .then(hyScores => {
+                        render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores)
+                    })
+                })
+            })
+        })
+    })
 }
