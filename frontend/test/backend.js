@@ -1,14 +1,16 @@
-let urlMarketsize = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/marketsize?key=AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8`;
-let urlExport = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/export?key=AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8`;
-let urlImport = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/import?key=AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8`;
-let urlPartners = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/partners?key=AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8`;
+let apiKey = "AIzaSyAGLAwV4t0vj6Fv-yc2uTEfae1-OsTvoA8";
+
+let urlMarketsize = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/marketsize?key=${apiKey}`;
+let urlExport = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/export?key=${apiKey}`;
+let urlImport = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/import?key=${apiKey}`;
+let urlPartners = `https://sheets.googleapis.com/v4/spreadsheets/1gg0k0ehDw_sskWxV8e-K5l-tZxvKr_H9-5SZlXN_qT4/values/partners?key=${apiKey}`;
 
 // execute(render, country1, country2, group);
 
 function execute(render, country1, country2, group) {
     fetch(urlMarketsize)
         .then((response) => response.json())
-        .then((hyMarksetsize) => {
+        .then((hyMarketSize) => {
             fetch(urlExport)
                 .then((response) => response.json())
                 .then((hyExport) => {
@@ -18,18 +20,18 @@ function execute(render, country1, country2, group) {
                             fetch(urlPartners)
                                 .then((response) => response.json())
                                 .then((hyPartners) => {
-                                    hyExport = hyExport.slice(1);
-                                    hyImport = hyImport.slice(1);
-                                    hyPartners = hyPartners.slice(1);
-                                    hyMarksetsize = hyMarksetsize.slice(1);
+                                    hyExport = hyExport.values.slice(1);
+                                    hyImport = hyImport.values.slice(1);
+                                    hyPartners = hyPartners.values.slice(1);
+                                    hyMarketSize = hyMarketSize.values.slice(1);
 
-                                    hyScores = computeHyScore(hyExport, hyImport, hyPartners, hyMarksetsize, group);
+                                    hyScores = computeHyScore(hyExport, hyImport, hyPartners, hyMarketSize, group);
                                     hyExport = convertHyExport(hyExport);
                                     hyImport = convertHyImport(hyImport);
-                                    hyMarksetsize = convertHyMarketsize(hyMarksetsize);
+                                    hyMarketSize = convertHyMarketsize(hyMarketSize);
                                     hyPartners = convertHyPartners(hyPartners);
 
-                                    render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores);
+                                    render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartners, hyScores);
                                 });
                         });
                 });
@@ -81,10 +83,10 @@ function getRecentHyImport(hyImport, name, group) {
     return recentRow;
 }
 
-function getRecentHyMarketsize(hyMarketsize, name, group) {
+function getRecentHyMarketsize(hyMarketSize, name, group) {
     recentYear = -1;
     recentRow = null;
-    hyMarketsize.forEach((row) => {
+    hyMarketSize.forEach((row) => {
         if (row[0] == name && row[1] == group) {
             if (parseInt(row[2]) > recentYear) {
                 recentYear = parseInt(row[2]);
@@ -98,7 +100,7 @@ function getRecentHyMarketsize(hyMarketsize, name, group) {
 //////////////////////////////////////////////////
 // HY SCORE
 
-function computeDomesticMarketShare(hyExport, hyImport, hyMarketsize, name, group) {
+function computeDomesticMarketShare(hyExport, hyImport, hyMarketSize, name, group) {
     hyExport = getRecentHyExport(hyExport, name, group);
     if (hyExport == null) return -1;
     hyImport = getRecentHyImport(hyImport, name, group);
@@ -106,23 +108,23 @@ function computeDomesticMarketShare(hyExport, hyImport, hyMarketsize, name, grou
 
     tradeBalance = parseFloat(hyExport[3]) - parseFloat(hyImport[3]);
 
-    hyMarketsize = getRecentHyMarketsize(hyMarketsize, name, group);
-    if (hyMarketsize == null) return -1;
+    hyMarketSize = getRecentHyMarketsize(hyMarketSize, name, group);
+    if (hyMarketSize == null) return -1;
 
-    marketsize = parseFloat(hyMarketsize[3]);
+    marketsize = parseFloat(hyMarketSize[3]);
     return (marketsize + tradeBalance) / marketsize;
 }
 
-function computeCompetition(hyPartners, hyMarketsize, name, group) {
+function computeCompetition(hyPartners, hyMarketSize, name, group) {
     hyPartners = hyPartners.filter((row) => row[0] == name);
 
     num = 0;
     denom = 0;
     hyPartners.forEach((row) => {
         proportion = parseFloat(row[3]);
-        hyMarketsize = getRecentHyMarketsize(hyMarketsize, name, group);
-        if (hyMarketsize == null) return;
-        marketsize = parseFloat(hyMarketsize[3]);
+        _hyMarketSize = getRecentHyMarketsize(hyMarketSize, name, group);
+        if (_hyMarketSize == null) return;
+        marketsize = parseFloat(_hyMarketSize[3]);
 
         num += proportion * marketsize;
         denom += proportion;
@@ -132,13 +134,13 @@ function computeCompetition(hyPartners, hyMarketsize, name, group) {
     return num / denom;
 }
 
-function computeTradeDependency(hyMarketsize, hyImport, name, group) {
-    hyMarketsize = getRecentHyMarketsize(hyMarketsize, name, group);
-    if (hyMarketsize == null) return -1;
+function computeTradeDependency(hyMarketSize, hyImport, name, group) {
+    hyMarketSize = getRecentHyMarketsize(hyMarketSize, name, group);
+    if (hyMarketSize == null) return -1;
     hyImport = getRecentHyImport(hyImport, name, group);
     if (hyImport == null) return -1;
 
-    return parseFloat(hyImport[3]) / parseFloat(hyMarketsize[3]);
+    return parseFloat(hyImport[3]) / parseFloat(hyMarketSize[3]);
 }
 
 function computeQuality(hyExport, name, group) {
@@ -147,8 +149,8 @@ function computeQuality(hyExport, name, group) {
     return parseFloat(hyExport[3]);
 }
 
-function comptueProtectionism(hyExport, hyImport, hyMarketsize, name, group) {
-    domestic = computeDomesticMarketShare(hyExport, hyImport, hyMarketsize, name, group);
+function comptueProtectionism(hyExport, hyImport, hyMarketSize, name, group) {
+    domestic = computeDomesticMarketShare(hyExport, hyImport, hyMarketSize, name, group);
     if (domestic == -1) return -1;
 
     quality = computeQuality(hyExport, name, group);
@@ -157,45 +159,42 @@ function comptueProtectionism(hyExport, hyImport, hyMarketsize, name, group) {
     return domestic / quality;
 }
 
-function computeSuccess(hyExport, hyImport, hyMarketsize, hyPartners, name, group) {
-    td = computeTradeDependency(hyMarketsize, hyImport, name, group);
+function computeSuccess(hyExport, hyImport, hyMarketSize, hyPartners, name, group) {
+    td = computeTradeDependency(hyMarketSize, hyImport, name, group);
     if (td == -1) return -1;
 
-    comp = computeCompetition(hyPartners, hyMarketsize, name, group);
+    comp = computeCompetition(hyPartners, hyMarketSize, name, group);
     if (comp == -1) return -1;
 
     qual = computeQuality(hyExport, name, group);
     if (qual == -1) return -1;
 
-    prot = comptueProtectionism(hyExport, hyImport, hyMarketsize, name, group);
+    prot = comptueProtectionism(hyExport, hyImport, hyMarketSize, name, group);
     if (prot == -1) return -1;
 
     return td / comp / qual / prot;
 }
 
-function computeHyScore(hyExport, hyImport, hyPartners, hyMarksetsize, group) {
+function computeHyScore(hyExport, hyImport, hyPartners, hyMarketSize, group) {
     names = [];
-    hyMarksetsize.forEach((row) => {
+    hyMarketSize.forEach((row) => {
         if (!names.includes(row[0])) {
             names.push(row[0]);
         }
     });
 
-    result = [];
-    names.forEach((name) => {
-        result.push({
-            name,
-            recentMarketsize: getRecentHyMarketsize(hyMarksetsize, name, group),
-            recentImport: getRecentHyImport(hyImport, name, group),
-            recentExport: getRecentHyExport(hyExport, name, group),
-            domesticMarketShare: computeDomesticMarketShare(hyExport, hyImport, hyMarksetsize, name, group),
-            competition: computeCompetition(hyPartners, hyMarksetsize, name, group),
-            tradeDependency: computeTradeDependency(hyMarksetsize, hyImport, name, group),
-            quality: computeQuality(hyExport, name, group),
-            protectionism: comptueProtectionism(hyExport, hyImport, hyMarksetsize, name, group),
-            success: computeSuccess(hyExport, hyImport, hyMarksetsize, hyPartners, name, group),
-        });
-    });
+    return names.map((name) => ({
+        name,
+        recentMarketsize: getRecentHyMarketsize(hyMarketSize, name, group)[3],
+        recentImport: getRecentHyImport(hyImport, name, group)[3],
+        recentExport: getRecentHyExport(hyExport, name, group)[3],
+        domesticMarketShare: computeDomesticMarketShare(hyExport, hyImport, hyMarketSize, name, group),
+        competition: computeCompetition(hyPartners, hyMarketSize, name, group),
+        tradeDependency: computeTradeDependency(hyMarketSize, hyImport, name, group),
+        quality: computeQuality(hyExport, name, group),
+        protectionism: comptueProtectionism(hyExport, hyImport, hyMarketSize, name, group),
+        success: computeSuccess(hyExport, hyImport, hyMarketSize, hyPartners, name, group),
+    }));
 }
 
 //////////////////////////////////////////////////
@@ -221,8 +220,8 @@ function convertHyImport(hyImport) {
     }));
 }
 
-function convertHyMarketsize(hyMarksetsize) {
-    return hyMarksetsize.map((row) => ({
+function convertHyMarketsize(hyMarketSize) {
+    return hyMarketSize.map((row) => ({
         index: row[0] + "_" + row[2] + "_" + row[1],
         name: row[0],
         year: row[2],

@@ -139,12 +139,38 @@ function makeRadar(country1, country2, scoreArray1, scoreArray2) {
 }
 
 function render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores) {
+    console.log(hyExport, hyMarketSize, hyImport, hyScores, hyPartner);
     allData = preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores);
     //[marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
     makeLines(country1, country2, allData[0], allData[1], allData[2]);
     makePies(country1, "pie1", allData[5], allData[9], allData[7]);
     makePies(country2, "pie2", allData[6], allData[10], allData[8]);
     makeRadar(country1, country2, allData[3], allData[4]);
+    var reports = makeReport(country1, country2, hyScores);
+    placeReport(country1, country2, reports[0], reports[1]);
+}
+
+function placeReport(country1, country2, report1, report2) {
+    document.getElementById("name1").appendChild(document.createTextNode(country1));
+    document.getElementById("name2").appendChild(document.createTextNode(country2));
+    document.getElementById("name1_pro").appendChild(document.createTextNode(country1));
+    document.getElementById("name2_pro").appendChild(document.createTextNode(country1));
+    for (const key in report1) {
+        let node = document.createElement("p");
+        let title = document.createElement("h6");
+        title.appendChild(document.createTextNode(key));
+        node.appendChild(title);
+        node.appendChild(document.createTextNode(report1[key]));
+        document.getElementById("report1").appendChild(node);
+    }
+    for (const key in report2) {
+        let node = document.createElement("p");
+        let title = document.createElement("h6");
+        title.appendChild(document.createTextNode(key));
+        node.appendChild(title);
+        node.appendChild(document.createTextNode(report2[key]));
+        document.getElementById("report2").appendChild(node);
+    }
 }
 
 function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores) {
@@ -181,22 +207,23 @@ function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport,
     // ['Quality', 'Competition', 'Protectionism', 'Market Size', 'Trade Dependency', 'Domestic Market Share']
     var scoreArray1 = [];
     var scoreArray2 = [];
+
     hyScores.forEach((score) => {
         if (score.name === country1) {
-            scoreArray1.push(score.recentExport);
-            scoreArray1.push(score.competition);
-            scoreArray1.push(score.protectionism);
-            scoreArray1.push(score.recentMarketsize);
-            scoreArray1.push(score.tradeDependency);
-            scoreArray1.push(score.domesticMarketShare);
+            scoreArray1.push(normalizeQuality(score.recentExport, hyScores));
+            scoreArray1.push(100 - normalizeQuality(score.competition, hyScores));
+            scoreArray1.push(100 - normalizeProtectionism(score.protectionism, hyScores));
+            scoreArray1.push(normalizeQuality(score.recentMarketsize, hyScores));
+            scoreArray1.push(normalizeQuality(score.tradeDependency, hyScores));
+            scoreArray1.push(100 - normalizeProtectionism(score.domesticMarketShare, hyScores));
         }
         if (score.name === country2) {
-            scoreArray2.push(score.recentExport);
-            scoreArray2.push(score.competition);
-            scoreArray2.push(score.protectionism);
-            scoreArray2.push(score.recentMarketsize);
-            scoreArray2.push(score.tradeDependency);
-            scoreArray2.push(score.domesticMarketShare);
+            scoreArray2.push(normalizeQuality(score.recentExport, hyScores));
+            scoreArray2.push(100 - normalizeQuality(score.competition, hyScores));
+            scoreArray2.push(100 - normalizeProtectionism(score.protectionism, hyScores));
+            scoreArray2.push(normalizeQuality(score.recentMarketsize, hyScores));
+            scoreArray2.push(normalizeQuality(score.tradeDependency, hyScores));
+            scoreArray2.push(100 - normalizeProtectionism(score.domesticMarketShare, hyScores));
         }
     });
 
@@ -217,52 +244,130 @@ function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport,
         }
     });
     partnerArray1.forEach((partner) => {
+        let exist = false;
         hyScores.forEach((score) => {
             if (score.name === partner) {
                 qualityArray1.push(score.recentExport);
+                exist = true;
             }
         });
+        if (!exist) qualityArray1.push(20);
     });
     partnerArray2.forEach((partner) => {
+        let exist = false;
         hyScores.forEach((score) => {
             if (score.name === partner) {
                 qualityArray2.push(score.recentExport);
+                exist = true;
             }
         });
+        if (!exist) qualityArray2.push(20);
     });
 
     return [marketSizeArray1, marketSizeArray2, marketSizeYears, scoreArray1, scoreArray2, partnerArray1, partnerArray2, proportionArray1, proportionArray2, qualityArray1, qualityArray2];
 }
 
-window.onload = () => {
-    let country1 = "러시아";
-    let country2 = "벨기에";
-    let group = "의료소모품";
+function makeReport(country1, country2, hyScores) {
+    let competition1 = null;
+    let competition2 = null;
+    let protectionism1 = null;
+    let protectionism2 = null;
+    let import1 = null;
+    let import2 = null;
+    let export1 = null;
+    let export2 = null;
+    let report1 = {};
+    let report2 = {};
+    hyScores.forEach((score) => {
+        if (score.name === country1) {
+            competition1 = score.competition;
+            protectionism1 = score.protectionism;
+            import1 = score.recentImport;
+            export1 = score.recentExport;
+        }
+        if (score.name === country2) {
+            competition2 = score.competition;
+            protectionism2 = score.protectionism;
+            import2 = score.recentImport;
+            export2 = score.recentExport;
+        }
+    });
 
-    fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
-        .then((response) => response.json())
-        .then((json) => json["hyExport"])
-        .then((hyExport) => {
-            fetch("http://0.0.0.0:1317/khidi/khidi/hy_marketsize")
-                .then((response) => response.json())
-                .then((json) => json["hyMarketsize"])
-                .then((hyMarketSize) => {
-                    fetch("http://0.0.0.0:1317/khidi/khidi/hy_import")
-                        .then((response) => response.json())
-                        .then((json) => json["hyImport"])
-                        .then((hyImport) => {
-                            fetch("http://0.0.0.0:1317/khidi/khidi/hy_partner")
-                                .then((response) => response.json())
-                                .then((json) => json["hyPartner"])
-                                .then((hyPartner) => {
-                                    fetch(`http://0.0.0.0:1317/khidi/khidi/hy_all_names_of/${group}`)
-                                        .then((response) => response.json())
-                                        .then((json) => json["HyAllNamesOf"])
-                                        .then((hyScores) => {
-                                            render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores);
-                                        });
-                                });
-                        });
-                });
-        });
+    if (competition1 > competition2) {
+        report2["낮은 경쟁"] = country1 + "(이)가 수입하는 국가들의 생산품질은" + country2 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
+    } else {
+        report1["낮은 경쟁"] = country2 + "(이)가 수입하는 국가들의 생산품질은" + country1 + "의 파트너에 비해 낮은 것으로 예측됩니다. 즉, 각국의 전체 수출량이 작습니다.";
+    }
+
+    if (protectionism1 > protectionism2) {
+        report2["낮은 보호주의"] =
+            country2 +
+            "은(는)" +
+            export2 / 10 +
+            "만달러를 수출하고," +
+            import2 / 10 +
+            "만달러를 수입하고 있습니다. 큰 수출규모를 달성할 기술이 있고, 내수점유율을 높일 수 있다고 판단되지만 여전히 시장규모 대비 많은 양을 수입하고 있어 보호주의가 낮은 비교적 자유로운 시장으로 분석됩니다.";
+    } else {
+        report1["낮은 보호주의"] =
+            country1 +
+            "은(는)" +
+            export1 / 10 +
+            "만달러를 수출하고," +
+            import1 / 10 +
+            "만달러를 수입하고 있습니다. 큰 수출규모를 달성할 기술이 있고, 내수점유율을 높일 수 있다고 판단되지만 여전히 시장규모 대비 많은 양을 수입하고 있어 보호주의가 낮은 비교적 자유로운 시장으로 분석됩니다.";
+    }
+    return [report1, report2];
+}
+
+function normalizeQuality(quality, hyScores) {
+    let max_score = 0;
+    hyScores.forEach((score) => {
+        if (score.quality * 1 > max_score) max_score = score.quality * 1;
+    });
+    return (quality * 100) / max_score;
+}
+
+function normalizeProtectionism(protectionism, hyScores) {
+    let minScore = 0;
+    let maxScore = 0;
+    hyScores.forEach((score) => {
+        if (score.protectionism * 1 < minScore) minScore = score.protectionism;
+        if (score.protectionism * 1 > maxScore) maxScore = score.protectionism;
+    });
+    return ((protectionism - minScore) / (maxScore - minScore)) * 100;
+}
+
+window.onload = () => {
+    let countryData = ["벨기에", "러시아", "미국", "영국", "중국", "폴란드"];
+    let country1 = countryData[sessionStorage.getItem("country1")];
+    let country2 = countryData[sessionStorage.getItem("country2")];
+    let group = sessionStorage.getItem("group");
+    execute(render, country1, country2, group);
+
+    // fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
+    // .then(response => response.json())
+    // .then(json => json["hyExport"])
+    // .then(hyExport => {
+    //     fetch("http://0.0.0.0:1317/khidi/khidi/hy_marketsize")
+    //     .then(response => response.json())
+    //     .then(json => json["hyMarketsize"])
+    //     .then(hyMarketSize => {
+    //         fetch("http://0.0.0.0:1317/khidi/khidi/hy_import")
+    //         .then(response => response.json())
+    //         .then(json => json["hyImport"])
+    //         .then(hyImport => {
+    //             fetch("http://0.0.0.0:1317/khidi/khidi/hy_partner")
+    //             .then(response => response.json())
+    //             .then(json => json["hyPartner"])
+    //             .then(hyPartner => {
+    //                 fetch(`http://0.0.0.0:1317/khidi/khidi/hy_all_names_of/${group}`)
+    //                 .then(response => response.json())
+    //                 .then(json => json["HyAllNamesOf"])
+    //                 .then(hyScores => {
+    //                     render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores)
+    //                 })
+    //             })
+    //         })
+    //     })
+    // })
 };

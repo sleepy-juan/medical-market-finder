@@ -102,6 +102,7 @@ function clockWise(lineHeight) {
 
     var eIndex = Math.round(unit / 22.5);
     $(".output").html(eIndex);
+    sessionStorage.setItem("country1",eIndex);
     $($options).hide();
     $($options.get(eIndex)).show();
     for (i = eIndex; i < (eIndex + 7); i++) {
@@ -134,6 +135,7 @@ function clockWise2(lineHeight) {
 
     var eIndex = Math.round(unit / 22.5*0.5);
     $(".output2").html(eIndex);
+    sessionStorage.setItem("country2",eIndex);
     $($options).hide();
     $($options.get(eIndex)).show();
     for (i = eIndex; i < (eIndex + 7); i++) {
@@ -236,3 +238,129 @@ function clockWise2(lineHeight) {
 
     };
 }(jQuery));
+
+
+
+
+
+
+//
+
+function clockWise3(lineHeight) {
+    var $scroller = $(".picker-scroller3");
+    var $clone = $(".clone-scroller3");
+    var $cloneScrollTop = $(".clone-scroller3").scrollTop();
+    var $options = $scroller.find(".option3");
+    var $optionsNo = $options.length*2;
+    var $cloneHeight = lineHeight * $optionsNo;
+    var totalDeg = 22.5 * $optionsNo*2;
+    var unit = totalDeg / $cloneHeight * $cloneScrollTop;
+    //    $(".output").html(totalDeg + "/" + $cloneHeight + "/" + $cloneScrollTop);
+    $scroller.css("-webkit-transform", "translateZ(-90px) rotateX(" + unit*0.5 + "deg)");
+
+    var eIndex = Math.round(unit / 22.5*0.5);
+    $(".output3").html(eIndex);
+    $($options).hide();
+    $($options.get(eIndex)).show();
+    for (i = eIndex; i < (eIndex + 7); i++) {
+        $($options.get(i)).show();
+    }
+    if (eIndex > 7) {
+        for (i = eIndex; i >= (eIndex - 7); i--) {
+            $($options.get(i)).show();
+        }
+    } else {
+        for (i = 0; i < 8; i++) {
+            $($options.get(i)).show();
+        }
+    }
+
+}
+
+
+(function ($) {
+
+    //    $("head").append("<style type='text/css'></style>");
+
+
+    $.fn.picker3 = function (json, callback) {
+        var options = json.data;
+        var lineHeight = 30;
+        $ele = $(this);
+        $ele.empty();
+        $ele.addClass("picker-wrapper3");
+        $ele.append('<div class="clone-scroller3"></div>');
+        $ele.append('<div class="picker-up3"></div>');
+        $ele.append('<div class="picker-down3"></div>');
+        $ele.append('<div class="picker-scroller3"></div>');
+
+        if (typeof json.lineHeight != "undefined") {
+            lineHeight = json.lineHeight;
+        }
+        $.each(options, function (index, option) {
+            $ele.find('.clone-scroller3').append('<div class="option3">' + option + '</div>');
+            $ele.find('.picker-scroller3').append('<div class="option3">' + option + '</div>');
+        });
+        $ele.find('.clone-scroller3').bind("scroll", function () {
+
+            clockWise3(lineHeight);
+        });
+        $ele.find(".clone-scroller3").bind("scrollstop", function (e) {
+            var scrollAmount = Math.round($(this).scrollTop() / lineHeight) * lineHeight;
+            $(this).parent().find(".clone-scroller3").animate({
+                scrollTop: scrollAmount*5
+            }, 100);
+            
+            
+            
+            var eIndex = Math.round(unit / 22.5);
+            var $scroller = $(".picker-scroller3");
+            var $clone = $(".clone-scroller3");
+            var $cloneScrollTop = $(".clone-scroller3").scrollTop();
+            var $options = $scroller.find(".option3");
+            var $optionsNo = $options.length;
+            var $cloneHeight = lineHeight * $optionsNo;
+            var totalDeg = 22.5 * $optionsNo;
+            var unit = totalDeg / $cloneHeight * $cloneScrollTop*2;
+            
+            unit = Math.round(unit/22.5)*22.5;
+    //    $(".output").html(totalDeg + "/" + $cloneHeight + "/" + $cloneScrollTop);
+    $scroller.css("-webkit-transform", "translateZ(-90px) rotateX(" + unit + "deg)");
+            
+            
+        });
+
+        /*setting css*/
+        if (typeof json.lineHeight != "undefined") {
+            $ele.css("height", (lineHeight * 7) + "px");
+            $ele.css("line-height", lineHeight + "px");
+            $ele.find('.clone-scroller3').css({
+                "padding-top": (lineHeight * 3) + "px",
+                "padding-bottom": (lineHeight * 3) + "px"
+            });
+            $ele.find('.picker-scroller3').css({
+                "padding-top": (lineHeight * 3) + "px",
+                "padding-bottom": (lineHeight * 3) + "px"
+            });
+            $ele.find(".picker-up3").css("height", (lineHeight * 3) + "px");
+            $ele.find(".picker-down3").css("height", (lineHeight * 3) + "px");
+            $ele.find(".picker-down3").css("top", (lineHeight * 4) + "px");
+        }
+        // default selected
+        if (typeof json.selected != "undefined") {
+            $ele.find('.clone-scroller3').scrollTop(lineHeight * json.selected);
+            $ele.find('.picker-scroller3').scrollTop(lineHeight * json.selected);
+        }
+
+        $ele.find('.picker-scroller3').find(".option3").each(function (index, $option) {
+            $option = $($option);
+            $option.css("-webkit-transform", "rotateX(-" + (22.5 * index) + "deg) translateZ(90px)");
+            if (index > 7) {
+                $option.hide();
+            }
+        });
+
+    };
+}(jQuery));
+
+var deg =0;

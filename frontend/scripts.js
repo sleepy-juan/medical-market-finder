@@ -24,7 +24,6 @@ window.onload = (event)=>{
     })
     document.getElementById("submit").addEventListener('click',(e)=>{
         if(submitCheck){
-            alert("hi");
             location.href="result.html";
         }
     })
