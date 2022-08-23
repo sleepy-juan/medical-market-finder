@@ -368,31 +368,31 @@ window.onload = () => {
     let country1 = countryData[sessionStorage.getItem("country1")];
     let country2 = countryData[sessionStorage.getItem("country2")];
     let group = sessionStorage.getItem("group");
-
-    fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
-    .then(response => response.json())
-    .then(json => json["hyExport"])
-    .then(hyExport => {
-        fetch("http://0.0.0.0:1317/khidi/khidi/hy_marketsize")
-        .then(response => response.json())
-        .then(json => json["hyMarketsize"])
-        .then(hyMarketSize => {
-            fetch("http://0.0.0.0:1317/khidi/khidi/hy_import")
-            .then(response => response.json())
-            .then(json => json["hyImport"])
-            .then(hyImport => {
-                fetch("http://0.0.0.0:1317/khidi/khidi/hy_partner")
-                .then(response => response.json())
-                .then(json => json["hyPartner"])
-                .then(hyPartner => {
-                    fetch(`http://0.0.0.0:1317/khidi/khidi/hy_all_names_of/${group}`)
-                    .then(response => response.json())
-                    .then(json => json["HyAllNamesOf"])
-                    .then(hyScores => {
-                        render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores)
-                    })
-                })
-            })
-        })
-    })
+    render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores)
+    // fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
+    // .then(response => response.json())
+    // .then(json => json["hyExport"])
+    // .then(hyExport => {
+    //     fetch("http://0.0.0.0:1317/khidi/khidi/hy_marketsize")
+    //     .then(response => response.json())
+    //     .then(json => json["hyMarketsize"])
+    //     .then(hyMarketSize => {
+    //         fetch("http://0.0.0.0:1317/khidi/khidi/hy_import")
+    //         .then(response => response.json())
+    //         .then(json => json["hyImport"])
+    //         .then(hyImport => {
+    //             fetch("http://0.0.0.0:1317/khidi/khidi/hy_partner")
+    //             .then(response => response.json())
+    //             .then(json => json["hyPartner"])
+    //             .then(hyPartner => {
+    //                 fetch(`http://0.0.0.0:1317/khidi/khidi/hy_all_names_of/${group}`)
+    //                 .then(response => response.json())
+    //                 .then(json => json["HyAllNamesOf"])
+    //                 .then(hyScores => {
+    //                     render(country1,country2,group,hyExport,hyMarketSize,hyImport,hyPartner,hyScores)
+    //                 })
+    //             })
+    //         })
+    //     })
+    // })
 }
