@@ -1,3 +1,12 @@
+const briefLinks = {
+    "러시아": "https://www.khidi.or.kr/fileDownload?titleId=408535&fileId=1&fileDownType=C&paramMenuId=MENU01529",
+    "폴란드": "https://www.khidi.or.kr/fileDownload?titleId=391384&fileId=1&fileDownType=C&paramMenuId=MENU01529",
+    "벨기에": "https://www.khidi.or.kr/fileDownload?titleId=381850&fileId=1&fileDownType=C&paramMenuId=MENU01529",
+    "중국": "https://www.khidi.or.kr/fileDownload?titleId=333053&fileId=1&fileDownType=C&paramMenuId=MENU01529",
+    "미국": "https://www.khidi.or.kr/fileDownload?titleId=154573&fileId=1&fileDownType=C&paramMenuId=MENU01529",
+    "영국": "https://www.khidi.or.kr/fileDownload?titleId=159448&fileId=1&fileDownType=C&paramMenuId=MENU01529"
+}
+
 // country1: 벨기에, country2: 러시아, scoreArray: [1년수출액,2년수출액,3년수출액,...], yearArray: [2011,2012,2013,...]
 // 모든 Array의 길이는 같아야한다. scoreArray[n]은 yearArray[n]년의 데이터이다.
 function makeLines(country1, country2, scoreArray1, scoreArray2, yearArray) {
@@ -181,7 +190,16 @@ function placeReport(country1, country2, report1, report2) {
         document.getElementById("report2").appendChild(node);
     }
 
-
+    var brief1 = document.createElement("a");
+    brief1.setAttribute("href",briefLinks[country1]);
+    brief1.textContent=country1+" 시장 브리프 다운로드";
+    brief1.classList.add("button");
+    var brief2 = document.createElement("a");
+    brief2.setAttribute("href",briefLinks[country2]);
+    brief2.textContent=country2+" 시장 브리프 다운로드";
+    brief2.classList.add("button");
+    document.getElementById("brief1").appendChild(brief1);
+    document.getElementById("brief2").appendChild(brief2);
 }
 
 
@@ -476,6 +494,7 @@ function normalizeMarketShare(MarketShare, hyScores) {
     });
     return 100-((MarketShare - minScore)*50 / (maxScore - minScore));
 }
+
 
 window.onload = () => {
     let countryData = ["벨기에", "러시아", "미국", "영국", "중국", "폴란드"];
