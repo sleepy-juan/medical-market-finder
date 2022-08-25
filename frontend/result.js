@@ -392,6 +392,10 @@ window.onload = () => {
     let country1 = countryData[sessionStorage.getItem("country1")];
     let country2 = countryData[sessionStorage.getItem("country2")];
     let group = sessionStorage.getItem("group");
+
+    if(!country1)country1="러시아";
+    if(!country2)country2="미국";
+    if(!group)group="의료소모품";
     execute(render, country1, country2, group);
 
     // fetch("http://0.0.0.0:1317/khidi/khidi/hy_export")
