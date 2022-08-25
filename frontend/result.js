@@ -340,7 +340,7 @@ function makeReport(country1, country2, hyScores) {
         country1 +
         "은(는) " +
         marketsize1+
-        "백만달러 규모의 시장을 갖고 있습니다. 이는 "+
+        "백만 달러 규모의 시장을 갖고 있습니다. 이는 "+
         country2 +
         "의 약 " +
         (marketsize1/marketsize2).toFixed(2)+
@@ -350,11 +350,41 @@ function makeReport(country1, country2, hyScores) {
         country2 +
         "은(는) " +
         marketsize2+
-        "백만달러 규모의 시장을 갖고 있습니다. 이는 "+
+        "백만 달러 규모의 시장을 갖고 있습니다. 이는 "+
         country1 +
         "의 약 " +
         (marketsize2/marketsize1).toFixed(2)+
         "배입니다."
+    }
+
+    if(export1 < export2){
+        report1["낮은 생산 역량"] =
+        country1 +
+        "은(는) " +
+        export1/10+
+        "만 달러 규모를 수출하고 있습니다. 반면 "+
+        country2 +
+        "은(는) " +
+        export2/10 +
+        "만 달러 규모를 수출하고 있어, "+
+        country1+
+        "에 비해 더 좋은 품질의 의료기기를 생산하거나, 더 높은 생산역량을 갖고 있어 이들의 내수시장을 점유하는 것보다는 "+
+        country1+
+        "의 내수시장을 공략하는 것이 비교적 쉬울 것으로 예상됩니다."
+    } else{
+        report2["낮은 생산 역량"] =
+        country2 +
+        "은(는) " +
+        export2/10+
+        "만 달러 규모를 수출하고 있습니다. 반면 "+
+        country1 +
+        "은(는) " +
+        export1/10 +
+        "만 달러 규모를 수출하고 있어, "+
+        country2+
+        "에 비해 더 좋은 품질의 의료기기를 생산하거나, 더 높은 생산역량을 갖고 있어 이들의 내수시장을 점유하는 것보다는 "+
+        country2+
+        "의 내수시장을 공략하는 것이 비교적 쉬울 것으로 예상됩니다."
     }
     return [report1, report2];
 }
