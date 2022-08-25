@@ -386,6 +386,40 @@ function makeReport(country1, country2, hyScores) {
         country2+
         "의 내수시장을 공략하는 것이 비교적 쉬울 것으로 예상됩니다."
     }
+    if(import1/marketsize1>import2/marketsize2){
+        report1["높은 무역의존도"] =
+        country1 +
+        "은(는) " +
+        import1/10+
+        "만 달러 규모를 수입하고 있으며, 이는 이 나라 시장 규모의 "+
+        Math.round(import1/marketsize1*0.1)+
+        "퍼센트에 해당합니다. 반면, "+
+        country2+
+        "은(는) "+
+        import2/10+
+        "만 달러를 수입하고 있으며, 이는 "+
+        country2+
+        " 시장 규모의 "+
+        Math.round(import2/marketsize2*0.1)+
+        "퍼센트입니다. 시장의 많은 부분을 무역에 의존할수록 해외 시장 진출이 용이합니다."
+    }else{
+        report2["높은 무역의존도"] =
+        country2 +
+        "은(는) " +
+        import2/10+
+        "만 달러 규모를 수입하고 있으며, 이는 이 나라 시장 규모의 "+
+        Math.round(import2/marketsize2*0.1)+
+        "퍼센트에 해당합니다. 반면, "+
+        country1+
+        "은(는) "+
+        import1/10+
+        "만 달러를 수입하고 있으며, 이는 "+
+        country1+
+        " 시장 규모의 "+
+        Math.round(import1/marketsize1*0.1)+
+        "퍼센트입니다. 시장의 많은 부분을 무역에 의존할수록 해외 시장 진출이 용이합니다."
+    }
+
     return [report1, report2];
 }
 
