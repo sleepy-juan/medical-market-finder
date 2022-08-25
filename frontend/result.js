@@ -286,6 +286,8 @@ function makeReport(country1, country2, hyScores) {
     let competition2 = null;
     let protectionism1 = null;
     let protectionism2 = null;
+    let marketsize1 = null;
+    let marketsize2 = null;
     let import1 = null;
     let import2 = null;
     let export1 = null;
@@ -298,12 +300,14 @@ function makeReport(country1, country2, hyScores) {
             protectionism1 = score.protectionism*1;
             import1 = score.recentImport*1;
             export1 = score.recentExport*1;
+            marketsize1 = score.recentMarketsize*1;
         }
         if (score.name === country2) {
             competition2 = score.competition*1;
             protectionism2 = score.protectionism*1;
             import2 = score.recentImport*1;
             export2 = score.recentExport*1;
+            marketsize2 = score.recentMarketsize*1;
         }
     });
 
@@ -316,7 +320,7 @@ function makeReport(country1, country2, hyScores) {
     if (protectionism1 > protectionism2) {
         report2["낮은 보호주의"] =
             country2 +
-            "은(는)" +
+            "은(는) " +
             export2 / 10 +
             "만달러를 수출하고," +
             import2 / 10 +
@@ -324,11 +328,33 @@ function makeReport(country1, country2, hyScores) {
     } else {
         report1["낮은 보호주의"] =
             country1 +
-            "은(는)" +
+            "은(는) " +
             export1 / 10 +
             "만달러를 수출하고," +
             import1 / 10 +
             "만달러를 수입하고 있습니다. 큰 수출규모를 달성할 기술이 있고, 내수점유율을 높일 수 있다고 판단되지만 여전히 시장규모 대비 많은 양을 수입하고 있어 보호주의가 낮은 비교적 자유로운 시장으로 분석됩니다.";
+    }
+
+    if(marketsize1 > marketsize2){
+        report1["큰 시장 규모"] =
+        country1 +
+        "은(는) " +
+        marketsize1+
+        "백만달러 규모의 시장을 갖고 있습니다. 이는 "+
+        country2 +
+        "의 약 " +
+        (marketsize1/marketsize2).toFixed(2)+
+        "배입니다."
+    } else{
+        report2["큰 시장 규모"] =
+        country2 +
+        "은(는) " +
+        marketsize2+
+        "백만달러 규모의 시장을 갖고 있습니다. 이는 "+
+        country1 +
+        "의 약 " +
+        (marketsize2/marketsize1).toFixed(2)+
+        "배입니다."
     }
     return [report1, report2];
 }
