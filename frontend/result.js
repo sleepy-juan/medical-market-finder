@@ -145,10 +145,11 @@ function render(country1, country2, group, hyExport, hyMarketSize, hyImport, hyP
     console.log(hyExport, hyMarketSize, hyImport, hyScores, hyPartner);
     allData = preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores);
     //[marketSizeArray1,marketSizeArray2,yearArray,scoreArray1,scoreArray2,partnerArray1, partnerArray2, proportionArray1,proportionArray2, qualityArray1, qualityArray2]
-    var overAll1 = allData[3].reduce((a,b)=>a+b,0)/6;
-    var overAll2 = allData[4].reduce((a,b)=>a+b,0)/6;
+    var overAll1 = Math.round(allData[3].reduce((a,b)=>a+b,0)/6);
+    var overAll2 = Math.round(allData[4].reduce((a,b)=>a+b,0)/6);
 
-    
+    document.getElementById("result1").appendChild(document.createTextNode(overAll1+"점"));
+    document.getElementById("result2").appendChild(document.createTextNode(overAll2+"점"));
 
     makeLines(country1, country2, allData[0], allData[1], allData[2]);
     makePies(country1, "pie1", allData[5], allData[9], allData[7]);
@@ -162,7 +163,7 @@ function placeReport(country1, country2, report1, report2) {
     document.getElementById("name1").appendChild(document.createTextNode(country1));
     document.getElementById("name2").appendChild(document.createTextNode(country2));
     document.getElementById("name1_pro").appendChild(document.createTextNode(country1));
-    document.getElementById("name2_pro").appendChild(document.createTextNode(country1));
+    document.getElementById("name2_pro").appendChild(document.createTextNode(country2));
     for (const key in report1) {
         let node = document.createElement("p");
         let title = document.createElement("h6");
@@ -179,7 +180,10 @@ function placeReport(country1, country2, report1, report2) {
         node.appendChild(document.createTextNode(report2[key]));
         document.getElementById("report2").appendChild(node);
     }
+
+
 }
+
 
 function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport, hyPartner, hyScores) {
     var marketSizeArray1 = [];
