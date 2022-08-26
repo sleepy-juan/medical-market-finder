@@ -94,8 +94,12 @@ function makePies(country, targetId, sellerList, sellerSizes, sellerProportions)
         },
         options: {
             scales: {
-                y: {
-                    beginAtZero: true,
+                // y: {
+                //     beginAtZero: true,
+                // },
+                r:{
+                    beginAtZero:true,
+                    // type:""
                 },
             },
 
@@ -284,23 +288,32 @@ function preprocess(country1, country2, group, hyExport, hyMarketSize, hyImport,
     });
     partnerArray1.forEach((partner) => {
         let exist = false;
-        hyScores.forEach((score) => {
+        let tempArray = [];
+        hyExport.forEach((score) => {
             if (score.name === partner) {
-                qualityArray1.push(score.recentExport);
+                tempArray.push(score.volume);
                 exist = true;
             }
         });
         if (!exist) qualityArray1.push(100);
+        else{
+            qualityArray1.push(tempArray[tempArray.length-1]);
+        }
     });
     partnerArray2.forEach((partner) => {
         let exist = false;
-        hyScores.forEach((score) => {
+        let tempArray = [];
+        hyExport.forEach((score) => {
             if (score.name === partner) {
-                qualityArray2.push(score.recentExport);
+                tempArray.push(score.volume);
                 exist = true;
             }
         });
+        console.log(tempArray);
         if (!exist) qualityArray2.push(100);
+        else{
+            qualityArray2.push(tempArray[tempArray.length-1]);
+        }
     });
 
     return [marketSizeArray1, marketSizeArray2, marketSizeYears, scoreArray1, scoreArray2, partnerArray1, partnerArray2, proportionArray1, proportionArray2, qualityArray1, qualityArray2];
