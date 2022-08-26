@@ -462,7 +462,7 @@ function normalizeQuality(quality, hyScores) {
     hyScores.forEach((score) => {
         if (score.quality * 1 > max_score) max_score = score.quality * 1;
     });
-    return Math.pow((quality) / max_score,0.5)*50+50;
+    return 100-Math.pow((quality) / max_score,0.5)*50;
 }
 
 function normalizeCompetition(competition, hyScores) {
